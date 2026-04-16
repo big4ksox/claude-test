@@ -490,6 +490,84 @@
     .sig-text h4 { font-size: .95rem; font-weight: 700; }
     .sig-text p { font-size: .78rem; color: var(--mid-gray); }
 
+    /* ── PRODUCTS ── */
+    #products { background: var(--white); }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .product-card {
+      background: var(--off-white);
+      border-radius: 16px;
+      padding: 1.8rem 1.6rem;
+      position: relative;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,.08);
+    }
+    .product-icon {
+      font-size: 2rem;
+      margin-bottom: .6rem;
+    }
+    .product-badge {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      background: var(--gold);
+      color: #fff;
+      padding: .25em .7em;
+      border-radius: 20px;
+      margin-bottom: .8rem;
+    }
+    .product-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: .2rem;
+    }
+    .product-sub {
+      font-size: .8rem;
+      color: var(--mid-gray);
+      margin-bottom: .9rem;
+    }
+    .product-steps {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 .9rem;
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+    }
+    .product-steps li {
+      font-size: .82rem;
+      color: var(--charcoal);
+      display: flex;
+      align-items: flex-start;
+      gap: .5rem;
+    }
+    .step-label {
+      flex-shrink: 0;
+      font-size: .7rem;
+      font-weight: 700;
+      background: var(--charcoal);
+      color: #fff;
+      padding: .15em .5em;
+      border-radius: 4px;
+      letter-spacing: .04em;
+    }
+    .product-desc {
+      font-size: .83rem;
+      color: var(--mid-gray);
+      line-height: 1.6;
+      margin: 0;
+    }
+
     /* ── PROCESS ── */
     #process { background: var(--off-white); }
     .process-steps {
@@ -739,6 +817,7 @@
     <li><a href="#services">시술 안내</a></li>
     <li><a href="#results">Before &amp; After</a></li>
     <li><a href="#about">원장 소개</a></li>
+    <li><a href="#products">홈케어 제품</a></li>
     <li><a href="#reviews">후기</a></li>
     <li><a href="#location">오시는 길</a></li>
   </ul>
@@ -792,40 +871,40 @@
 
     <div class="services-grid">
       <div class="service-card reveal">
-        <div class="service-icon">✨</div>
-        <h3>피부 관리</h3>
-        <p>딥클렌징·수분공급·탄력 회복 등 피부 상태에 맞춘 맞춤형 집중 케어 프로그램. 즉각적인 광채와 장기적인 피부 건강을 동시에.</p>
-        <span class="service-tag">Skin Care</span>
-      </div>
-      <div class="service-card reveal">
         <div class="service-icon">💉</div>
-        <h3>보톡스 · 필러</h3>
-        <p>정밀한 용량 조절과 세밀한 주사 기법으로 자연스러운 윤곽 개선. 주름 완화부터 볼륨 보정까지, 과하지 않게.</p>
-        <span class="service-tag">Botox &amp; Filler</span>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-icon">🔆</div>
-        <h3>레이저 · 토닝</h3>
-        <p>색소·모공·잡티 개선에 특화된 레이저 시술. 피부 재생을 촉진하고 균일한 피부 톤을 만들어 드립니다.</p>
-        <span class="service-tag">Laser Toning</span>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-icon">🌿</div>
-        <h3>리프팅 · 타이트닝</h3>
-        <p>HIFU·실 리프팅·열 에너지 기반 시술로 처짐 개선과 탄력 회복. 수술 없이 자연스러운 V라인을 완성합니다.</p>
-        <span class="service-tag">Lifting</span>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-icon">💧</div>
-        <h3>수분·재생 치료</h3>
-        <p>건조하고 예민한 피부를 위한 집중 보습 및 피부 장벽 강화 치료. 엑소좀·PRP·물광주사 등으로 속부터 채워드립니다.</p>
-        <span class="service-tag">Hydration</span>
+        <h3>슈퍼젝션 전문 케어</h3>
+        <p>피네스테틱의 핵심 특화 시술. 피부에 필요한 성분을 효과적으로 공급해 모공·탄력·피부결·속건조를 복합적으로 개선합니다. 슈퍼젝션 공인 전문 클리닉으로 한 번에 여러 고민을 해결합니다.</p>
+        <span class="service-tag">Superjection</span>
       </div>
       <div class="service-card reveal">
         <div class="service-icon">🌙</div>
-        <h3>여드름 · 흉터 관리</h3>
-        <p>염증성 여드름부터 흉터 개선까지. 피부 상태를 근본적으로 개선하는 복합 치료 프로토콜을 적용합니다.</p>
+        <h3>흉터 · 모공 집중 관리</h3>
+        <p>슈퍼젝션 복합 케어와 피어세움 프로그램으로 염증성 여드름·흉터·모공을 근본부터 개선합니다. 반복되는 트러블이 색소침착과 흉터로 이어지지 않도록 체계적으로 관리합니다.</p>
         <span class="service-tag">Acne &amp; Scar</span>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">💧</div>
+        <h3>수분 · 피부 재생 케어</h3>
+        <p>비반콴트망카키트 3STEP 수분 부스터로 피부 속 수분 통로를 열어 속건조·각질·화장 들뜸을 개선합니다. 피부 장벽 강화와 탄력 회복을 동시에 케어합니다.</p>
+        <span class="service-tag">Hydration</span>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🌿</div>
+        <h3>HIFU 리프팅</h3>
+        <p>고강도 집속 초음파로 피부 깊은 층을 자극해 처짐을 개선하고 탄력을 회복합니다. 목주름·얼굴 라인을 수술 없이 자연스럽게 끌어올립니다.</p>
+        <span class="service-tag">Lifting</span>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">✨</div>
+        <h3>맞춤형 피부 관리</h3>
+        <p>피부 타입·고민·컨디션에 따른 1:1 맞춤 케어 프로그램. 즉각적인 피부 컨디션 회복부터 장기적인 피부 건강까지, 중요한 일정 전 단기 집중 관리도 가능합니다.</p>
+        <span class="service-tag">Skin Care</span>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🏠</div>
+        <h3>홈케어 연계 프로그램</h3>
+        <p>전문 시술 효과를 집에서도 유지하는 홈슈젝(홈 슈퍼젝션) 3단계 시스템. 시술 후 예민해진 피부를 안정시키고 탄력·보습·광채를 지속적으로 유지합니다.</p>
+        <span class="service-tag">Home Care</span>
       </div>
     </div>
   </div>
@@ -892,7 +971,7 @@
         <div class="ba-info">
           <h4>색소 · 잡티 개선</h4>
           <p>멜라닌 색소 케어</p>
-          <div class="ba-sessions"><span>✦ 레이저 토닝 복합</span></div>
+          <div class="ba-sessions"><span>✦ 슈퍼젝션 복합 케어</span></div>
         </div>
       </div>
 
@@ -983,6 +1062,109 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRODUCTS ── -->
+<section id="products">
+  <div class="container">
+    <p class="section-eyebrow reveal">Home Care Line</p>
+    <h2 class="section-title reveal">피네스테틱 홈케어 제품</h2>
+    <p class="section-desc reveal">시술 효과를 집에서도 이어가는 전문 홈케어 라인업. 원장님이 직접 선별한 성분과 단계별 케어 솔루션.</p>
+
+    <div class="products-grid reveal">
+
+      <div class="product-card">
+        <div class="product-icon">💉</div>
+        <div class="product-badge">베스트셀러</div>
+        <h3 class="product-name">홈슈젝 3단계</h3>
+        <p class="product-sub">홈 슈퍼젝션 홈케어 키트</p>
+        <ul class="product-steps">
+          <li><span class="step-label">STEP 1</span> 스타터 — 오픈 앰플 (피부 흡수 채널 개방)</li>
+          <li><span class="step-label">STEP 2</span> 엑티베이터 — 메인 앰플 (유효성분 집중 공급)</li>
+          <li><span class="step-label">STEP 3</span> 엑티브크림 — 성분 고정 &amp; 마무리</li>
+        </ul>
+        <p class="product-desc">시술 후 집에서도 슈퍼젝션 효과를 유지하는 3단계 프로그램</p>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">💧</div>
+        <div class="product-badge">수분케어</div>
+        <h3 class="product-name">비반콴트망카 키트</h3>
+        <p class="product-sub">3STEP 수분 부스터</p>
+        <ul class="product-steps">
+          <li><span class="step-label">STEP 1</span> 오프너 — 수분 통로 개방</li>
+          <li><span class="step-label">STEP 2</span> 플랜터 — 수분 집중 공급</li>
+          <li><span class="step-label">STEP 3</span> 프로텍터 — 수분 잠금 &amp; 보호</li>
+        </ul>
+        <p class="product-desc">속건조·모공·수분통로 개선을 동시에 해결하는 전문 수분케어 키트</p>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">✨</div>
+        <div class="product-badge">기능성</div>
+        <h3 class="product-name">비반콴트망카 로션</h3>
+        <p class="product-sub">재생 크림 (구 파이토신 리뉴얼)</p>
+        <p class="product-desc">나이아신아마이드 &amp; 아데노신 추가. 미백·주름개선 2중 기능성 인증. 시술 후 피부 재생과 톤 정돈을 동시에.</p>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">🛡️</div>
+        <div class="product-badge">시술 후 필수</div>
+        <h3 class="product-name">파이널밤</h3>
+        <p class="product-sub">재생 비비크림</p>
+        <p class="product-desc">특허 NB P-Complex 성분, 마이크로바이옴 케어, DL-판테놀 함유. 시술 직후에도 메이크업 가능한 재생 비비크림.</p>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">🌙</div>
+        <div class="product-badge">수면케어</div>
+        <h3 class="product-name">루티너</h3>
+        <p class="product-sub">수면 필링제</p>
+        <p class="product-desc">AHA 복합산 배합. 자는 동안 블랙헤드·각질·피지를 관리하는 수면 필링제.</p>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">🫧</div>
+        <div class="product-badge">모공케어</div>
+        <h3 class="product-name">세멘잘라이트</h3>
+        <p class="product-sub">필러 크림</p>
+        <p class="product-desc">모공을 채우듯 탄력을 채우는 필러 크림. 모공 축소 &amp; 탄력 개선 2-in-1 솔루션.</p>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">📋</div>
+        <div class="product-badge">집중케어</div>
+        <h3 class="product-name">세멘시트</h3>
+        <p class="product-sub">모공·피지 케어 시트</p>
+        <p class="product-desc">모공과 피지를 집중 관리하는 전문 케어 시트. 피부결 정돈 &amp; 피지 밸런스 조절.</p>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">🔬</div>
+        <div class="product-badge">트러블케어</div>
+        <h3 class="product-name">픽사드 키트</h3>
+        <p class="product-sub">속건조·탄력·좁쌀 개선</p>
+        <p class="product-desc">속건조, 탄력 저하, 좁쌀 트러블을 동시에 개선하는 복합 케어 키트.</p>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">💆</div>
+        <div class="product-badge">두피케어</div>
+        <h3 class="product-name">크레시나</h3>
+        <p class="product-sub">두피 앰플</p>
+        <p class="product-desc">탈모 예방 전문 두피 앰플. 두피 영양 공급과 모발 강화를 위한 집중 케어.</p>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">☀️</div>
+        <div class="product-badge">선케어</div>
+        <h3 class="product-name">피니쉬 로션</h3>
+        <p class="product-sub">재생 선크림</p>
+        <p class="product-desc">피부 장벽을 강화하면서 자외선 차단까지. 시술 후 예민해진 피부를 보호하는 재생 선크림.</p>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1115,7 +1297,7 @@
           <div class="info-icon">📍</div>
           <div class="info-content">
             <label>주소</label>
-            <p>인천 서구 건지아베뉴빌딩 99<br/>지하 1층 을동 002호</p>
+            <p>인천광역시 서구 청라에메랄드로 99<br/>지하 1층 B동 092호</p>
           </div>
         </div>
 
@@ -1161,7 +1343,7 @@
 <!-- ── FOOTER ── -->
 <footer>
   <div class="footer-logo"><span>Fi_ne</span>.sthetic</div>
-  <p>인천 서구 건지아베뉴빌딩 99 지하1층 을동 002호</p>
+  <p>인천광역시 서구 청라에메랄드로 99 지하1층 B동 092호</p>
   <p style="margin-top:4px">© 2026 피네스테틱 · 김수라 원장 · All rights reserved.</p>
   <p style="margin-top:12px; font-size:.74rem; opacity:.5">본 페이지의 Before &amp; After 사진은 실제 고객님의 동의를 받아 게재되었으며, 시술 효과는 개인차가 있을 수 있습니다.</p>
 </footer>

@@ -15,7 +15,23 @@
       "Bash(3216089122737836996)",
       "Bash(3214623211577157038)",
       "Bash(3212477397193349480)",
-      "Bash(3528540966098977585\")"
+      "Bash(3528540966098977585\")",
+      "WebFetch(domain:blog.naver.com)",
+      "WebFetch(domain:m.blog.naver.com)",
+      "WebSearch",
+      "WebFetch(domain:webcache.googleusercontent.com)",
+      "WebFetch(domain:web.archive.org)",
+      "WebFetch(domain:rss.blog.naver.com)",
+      "WebFetch(domain:pharmer.pharmesthetic.com)",
+      "WebFetch(domain:www.pharmesthetic.com)",
+      "WebFetch(domain:koreatownnews.com)",
+      "WebFetch(domain:api.search.naver.com)",
+      "Bash(curl -s -L -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" -H \"Accept-Language: ko-KR,ko;q=0.9\" \"https://blog.naver.com/finesthetic\")",
+      "Bash(curl -s -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" \"https://blog.naver.com/PostList.naver?blogId=finesthetic&widgetTypeCall=true\")",
+      "Bash(curl -s -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" \"https://blog.naver.com/PostList.naver?blogId=finesthetic&widgetTypeCall=true&page=2\")",
+      "Bash(curl -s -A 'Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36' 'https://blog.naver.com/PostList.naver?blogId=finesthetic&widgetTypeCall=true&currentPage=__TRACKED_VAR__')",
+      "Bash(curl -s -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" \"https://blog.naver.com/PostList.naver?blogId=finesthetic&widgetTypeCall=true\" -o C:/Users/tnfk4/claude-test/blog_raw.html)",
+      "Bash(python *)"
     ]
   }
 }
