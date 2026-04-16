@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:map.naver.com)",
+      "Bash(pip --version)",
+      "Bash(pip install *)",
+      "Bash(python -m instaloader --dirname-pattern=images/instagram --filename-pattern=\"{date_utc:%Y%m%d}_{shortcode}\" --no-videos --no-video-thumbnails --no-captions fi_ne.sthetic_)",
+      "Bash(python -c ' *)",
+      "Bash(mkdir -p images/instagram)",
+      "Bash(python -m gallery_dl --cookies cookies.txt --directory images/instagram \"https://www.instagram.com/fi_ne.sthetic_/\")",
+      "Bash(ls images/instagram/*.jpg)",
+      "Bash(3359623098817907160)",
+      "Bash(3273485766361872216)",
+      "Bash(3224405952263061244)",
+      "Bash(3216089122737836996)",
+      "Bash(3214623211577157038)",
+      "Bash(3212477397193349480)",
+      "Bash(3528540966098977585\")"
+    ]
+  }
+}

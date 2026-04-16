@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>피네스테틱 | Fi_ne.sthetic — 김수라 원장</title>
+  <style>
+    :root {
+      --white: #ffffff;
+      --off-white: #f5f5f7;
+      --light-gray: #e8e8ed;
+      --mid-gray: #6e6e73;
+      --dark: #1d1d1f;
+      --accent: #0071e3;
+      --accent-hover: #0077ed;
+      --gold: #b08d57;
+      --gold-light: #d4af7a;
+      --radius: 18px;
+      --radius-sm: 12px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--dark);
+      
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: .84rem;
+      color: var(--dark);
+      text-decoration: none;
+      opacity: 0.75;
+      transition: opacity .2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .nav-cta {
+      background: var(--dark);
+      color: #fff;
+      font-size: .82rem;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background .2s;
+    }
+    .nav-cta:hover { background: #333; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse, rgba(176,141,87,.08) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -60%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp .8s .2s ease forwards;
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+      color: var(--dark);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp .8s .4s ease forwards;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--mid-gray);
+      max-width: 520px;
+      margin: 0 auto 44px;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp .8s .6s ease forwards;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp .8s .8s ease forwards;
+    }
+    .btn-primary {
+      background: var(--dark);
+      color: #fff;
+      font-size: .95rem;
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: #333; transform: scale(1.02); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent);
+      font-size: .95rem;
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: 999px;
+      text-decoration: none;
+      border: 1.5px solid var(--accent);
+      transition: all .2s;
+    }
+    .btn-secondary:hover { background: var(--accent); color: #fff; }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: .4;
+      animation: fadeIn 1s 1.4s ease forwards, bob 2s 2s ease-in-out infinite;
+    }
+    .hero-scroll span { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--dark), transparent);
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--off-white);
+      padding: 48px 40px;
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-size: 2.6rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--dark);
+      line-height: 1;
+    }
+    .stat-num sup { font-size: 1.2rem; vertical-align: super; }
+    .stat-label { font-size: .82rem; color: var(--mid-gray); margin-top: 6px; }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 100px 24px; }
+    .section-eyebrow {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      font-size: 1rem;
+      color: var(--mid-gray);
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 64px;
+      line-height: 1.75;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* ── SERVICES ── */
+    #services { background: var(--white); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .service-card {
+      background: var(--off-white);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0,0,0,.1);
+    }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(176,141,87,.06), transparent 60%);
+      opacity: 0;
+      transition: opacity .3s;
+      border-radius: var(--radius);
+    }
+    .service-card:hover::after { opacity: 1; }
+    .service-icon {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      flex-shrink: 0;
+    }
+    .service-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .service-card p {
+      font-size: .86rem;
+      color: var(--mid-gray);
+      line-height: 1.7;
+    }
+    .service-tag {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(176,141,87,.12);
+      color: var(--gold);
+      margin-top: 16px;
+    }
+
+    /* ── BEFORE & AFTER ── */
+    #results { background: var(--off-white); }
+    .ba-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+    .ba-tab {
+      background: transparent;
+      border: 1.5px solid var(--light-gray);
+      color: var(--mid-gray);
+      font-size: .84rem;
+      font-weight: 600;
+      padding: 9px 22px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .ba-tab.active, .ba-tab:hover {
+      background: var(--dark);
+      color: #fff;
+      border-color: var(--dark);
+    }
+    .ba-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .ba-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,.06);
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
+    }
+    .ba-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,.12);
+    }
+    .ba-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      position: relative;
+    }
+    .ba-img-wrap {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      background: #f0ece6;
+    }
+    .ba-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .4s;
+    }
+    .ba-card:hover .ba-img-wrap img { transform: scale(1.04); }
+    .ba-label {
+      position: absolute;
+      top: 10px; left: 10px;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
+    }
+    .ba-label.before {
+      background: rgba(255,255,255,.85);
+      color: var(--mid-gray);
+    }
+    .ba-label.after {
+      background: rgba(176,141,87,.85);
+      color: #fff;
+    }
+    .ba-divider {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: #fff;
+      transform: translateX(-50%);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .ba-info {
+      padding: 20px 22px;
+    }
+    .ba-info h4 {
+      font-size: .95rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .ba-info p { font-size: .8rem; color: var(--mid-gray); }
+    .ba-sessions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+    }
+    .ba-sessions span {
+      font-size: .75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--off-white);
+      color: var(--mid-gray);
+    }
+
+    /* placeholder images */
+    .photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #f0ece6, #e8e4de);
+    }
+    .photo-placeholder .ph-icon { font-size: 2rem; opacity: .35; }
+    .photo-placeholder .ph-text { font-size: .7rem; color: #9a8f84; font-weight: 500; }
+
+    /* ── ABOUT DIRECTOR ── */
+    #about { background: var(--white); }
+    .about-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .about-img-wrap {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, #f0ece6, #e8e4de);
+    }
+    .about-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .about-img-deco {
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 180px; height: 180px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: 50%;
+      opacity: .1;
+      pointer-events: none;
+    }
+    .about-content { }
+    .about-content .section-eyebrow { text-align: left; }
+    .about-content .section-title { text-align: left; font-size: clamp(1.6rem,3vw,2.2rem); }
+    .about-content .section-desc { text-align: left; margin: 0 0 32px; }
+    .about-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .about-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: .9rem;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    .about-list li::before {
+      content: '✦';
+      color: var(--gold);
+      font-size: .7rem;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+    .about-signature {
+      margin-top: 36px;
+      padding-top: 28px;
+      border-top: 1px solid var(--light-gray);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .sig-avatar {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .sig-text h4 { font-size: .95rem; font-weight: 700; }
+    .sig-text p { font-size: .78rem; color: var(--mid-gray); }
+
+    /* ── PROCESS ── */
+    #process { background: var(--off-white); }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2px;
+      background: var(--light-gray);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .process-step {
+      background: var(--white);
+      padding: 36px 28px;
+      position: relative;
+    }
+    .step-num {
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .15em;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .process-step h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .process-step p {
+      font-size: .82rem;
+      color: var(--mid-gray);
+      line-height: 1.7;
+    }
+
+    /* ── REVIEW ── */
+    #reviews { background: var(--white); }
+    .reviews-track { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 12px; scroll-snap-type: x mandatory; }
+    .reviews-track::-webkit-scrollbar { height: 4px; }
+    .reviews-track::-webkit-scrollbar-track { background: var(--light-gray); border-radius: 2px; }
+    .reviews-track::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+    .review-card {
+      flex-shrink: 0;
+      width: 320px;
+      background: var(--off-white);
+      border-radius: var(--radius);
+      padding: 28px 26px;
+      scroll-snap-align: start;
+    }
+    .stars { color: var(--gold); font-size: .9rem; letter-spacing: 2px; margin-bottom: 14px; }
+    .review-text { font-size: .88rem; line-height: 1.75; color: var(--dark); margin-bottom: 20px; }
+    .reviewer {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .reviewer-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, #e8e4de, #d4c9be);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; font-weight: 700; color: #8a7b6e;
+      flex-shrink: 0;
+    }
+    .reviewer-info h5 { font-size: .84rem; font-weight: 700; }
+    .reviewer-info span { font-size: .74rem; color: var(--mid-gray); }
+
+    /* ── LOCATION ── */
+    #location { background: var(--off-white); }
+    .location-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .map-embed {
+      border-radius: var(--radius);
+      overflow: hidden;
+      height: 380px;
+      background: var(--light-gray);
+      position: relative;
+    }
+    .map-embed iframe {
+      width: 100%; height: 100%; border: 0;
+    }
+    .map-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--mid-gray);
+      font-size: .9rem;
+    }
+    .map-placeholder .map-icon { font-size: 2.5rem; }
+    .info-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 36px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.06);
+    }
+    .info-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 28px;
+    }
+    .info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--light-gray);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-icon {
+      width: 38px; height: 38px;
+      background: var(--off-white);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .95rem;
+      flex-shrink: 0;
+    }
+    .info-content label { font-size: .72rem; font-weight: 700; color: var(--gold); letter-spacing: .1em; text-transform: uppercase; display: block; margin-bottom: 3px; }
+    .info-content p { font-size: .88rem; color: var(--dark); line-height: 1.6; }
+    .cta-bar {
+      margin-top: 24px;
+      display: flex;
+      gap: 10px;
+    }
+    .cta-bar a {
+      flex: 1;
+      text-align: center;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      font-size: .84rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all .2s;
+    }
+    .cta-call {
+      background: var(--dark);
+      color: #fff;
+    }
+    .cta-call:hover { background: #333; }
+    .cta-naver {
+      background: #03c75a;
+      color: #fff;
+    }
+    .cta-naver:hover { background: #02b050; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,.5);
+      text-align: center;
+      padding: 48px 24px 40px;
+      font-size: .8rem;
+      line-height: 2;
+    }
+    footer .footer-logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    footer .footer-logo span { color: var(--gold-light); }
+
+    /* ── BA SINGLE CARD ── */
+    .ba-single-wrap {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      background: #f0ece6;
+    }
+    .ba-single-wrap img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform .4s;
+    }
+    .ba-card:hover .ba-single-wrap img { transform: scale(1.03); }
+    .ba-overlay {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,0,0,.45);
+      backdrop-filter: blur(6px);
+      padding: 5px 14px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .ba-chip {
+      font-size: .72rem;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 999px;
+    }
+    .before-chip { background: rgba(255,255,255,.85); color: #555; }
+    .after-chip  { background: rgba(176,141,87,.9); color: #fff; }
+    .ba-arrow { color: rgba(255,255,255,.8); font-size: .85rem; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      to { opacity: .4; }
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .about-wrap { grid-template-columns: 1fr; gap: 40px; }
+      .about-img-wrap { aspect-ratio: 4/3; }
+      .location-wrap { grid-template-columns: 1fr; }
+      .stats-bar { gap: 36px; }
+      section { padding: 72px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav>
+  <a class="nav-logo" href="#"><span>Fi_ne</span>.sthetic</a>
+  <ul class="nav-links">
+    <li><a href="#services">시술 안내</a></li>
+    <li><a href="#results">Before &amp; After</a></li>
+    <li><a href="#about">원장 소개</a></li>
+    <li><a href="#reviews">후기</a></li>
+    <li><a href="#location">오시는 길</a></li>
+  </ul>
+  <a class="nav-cta" href="tel:032-000-0000">예약 문의</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-eyebrow">Premium Aesthetic Care · 인천 서구</div>
+  <h1>아름다움의<br/><em>새로운 기준</em></h1>
+  <p class="hero-sub">
+    피네스테틱에서 경험하는 섬세한 시술.<br/>
+    당신의 자연스러운 아름다움을 더 빛나게 합니다.
+  </p>
+  <div class="hero-buttons">
+    <a class="btn-primary" href="#results">시술 결과 보기</a>
+    <a class="btn-secondary" href="#services">시술 안내 →</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ── STATS ── -->
+<div class="stats-bar reveal">
+  <div class="stat">
+    <div class="stat-num">5<sup>★</sup></div>
+    <div class="stat-label">네이버 평균 평점</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">2,277<sup>+</sup></div>
+    <div class="stat-label">누적 방문자 리뷰</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">96<sup>+</sup></div>
+    <div class="stat-label">블로그 후기</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">1<sup>위</sup></div>
+    <div class="stat-label">지역 내 고객 만족도</div>
+  </div>
+</div>
+
+<!-- ── SERVICES ── -->
+<section id="services">
+  <div class="container">
+    <p class="section-eyebrow reveal">Services</p>
+    <h2 class="section-title reveal">세심하게 설계된<br/>시술 프로그램</h2>
+    <p class="section-desc reveal">피부 타입과 고민에 맞춰 1:1 맞춤 컨설팅 후 최적의 시술을 제안합니다.</p>
+
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">✨</div>
+        <h3>피부 관리</h3>
+        <p>딥클렌징·수분공급·탄력 회복 등 피부 상태에 맞춘 맞춤형 집중 케어 프로그램. 즉각적인 광채와 장기적인 피부 건강을 동시에.</p>
+        <span class="service-tag">Skin Care</span>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">💉</div>
+        <h3>보톡스 · 필러</h3>
+        <p>정밀한 용량 조절과 세밀한 주사 기법으로 자연스러운 윤곽 개선. 주름 완화부터 볼륨 보정까지, 과하지 않게.</p>
+        <span class="service-tag">Botox &amp; Filler</span>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🔆</div>
+        <h3>레이저 · 토닝</h3>
+        <p>색소·모공·잡티 개선에 특화된 레이저 시술. 피부 재생을 촉진하고 균일한 피부 톤을 만들어 드립니다.</p>
+        <span class="service-tag">Laser Toning</span>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🌿</div>
+        <h3>리프팅 · 타이트닝</h3>
+        <p>HIFU·실 리프팅·열 에너지 기반 시술로 처짐 개선과 탄력 회복. 수술 없이 자연스러운 V라인을 완성합니다.</p>
+        <span class="service-tag">Lifting</span>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">💧</div>
+        <h3>수분·재생 치료</h3>
+        <p>건조하고 예민한 피부를 위한 집중 보습 및 피부 장벽 강화 치료. 엑소좀·PRP·물광주사 등으로 속부터 채워드립니다.</p>
+        <span class="service-tag">Hydration</span>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🌙</div>
+        <h3>여드름 · 흉터 관리</h3>
+        <p>염증성 여드름부터 흉터 개선까지. 피부 상태를 근본적으로 개선하는 복합 치료 프로토콜을 적용합니다.</p>
+        <span class="service-tag">Acne &amp; Scar</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BEFORE & AFTER ── -->
+<section id="results">
+  <div class="container">
+    <p class="section-eyebrow reveal">Real Results</p>
+    <h2 class="section-title reveal">직접 확인하는<br/>시술 효과</h2>
+    <p class="section-desc reveal">실제 고객분들의 동의 하에 게재된 시술 전후 사진입니다.<br/>자연스러운 변화, 눈으로 확인하세요.</p>
+
+    <div class="ba-tabs reveal">
+      <button class="ba-tab active" data-filter="all">전체</button>
+      <button class="ba-tab" data-filter="lifting">리프팅</button>
+      <button class="ba-tab" data-filter="skin">피부관리</button>
+      <button class="ba-tab" data-filter="filler">보톡스·필러</button>
+      <button class="ba-tab" data-filter="acne">여드름</button>
+    </div>
+
+    <div class="ba-grid" id="baGrid">
+
+      <div class="ba-card reveal" data-category="acne">
+        <div class="ba-single-wrap">
+          <img src="images/instagram/3832112050315700836.jpg" alt="여드름 전후" loading="lazy"/>
+          <div class="ba-overlay">
+            <span class="ba-chip before-chip">Before</span>
+            <span class="ba-arrow">→</span>
+            <span class="ba-chip after-chip">After</span>
+          </div>
+        </div>
+        <div class="ba-info">
+          <h4>여드름 집중 치료</h4>
+          <p>염증성 여드름 · 피부 재건</p>
+          <div class="ba-sessions"><span>✦ 슈퍼젝션 복합 케어</span></div>
+        </div>
+      </div>
+
+      <div class="ba-card reveal" data-category="pore">
+        <div class="ba-single-wrap">
+          <img src="images/instagram/3359623098817907160.jpg" alt="코 주변 전후" loading="lazy"/>
+          <div class="ba-overlay">
+            <span class="ba-chip before-chip">Before</span>
+            <span class="ba-arrow">→</span>
+            <span class="ba-chip after-chip">After</span>
+          </div>
+        </div>
+        <div class="ba-info">
+          <h4>코 주변 모공 개선</h4>
+          <p>모공 · 피지 케어</p>
+          <div class="ba-sessions"><span>✦ 피지 조절 케어</span></div>
+        </div>
+      </div>
+
+      <div class="ba-card reveal" data-category="skin">
+        <div class="ba-single-wrap">
+          <img src="images/instagram/3224405952263061244.jpg" alt="색소 전후" loading="lazy"/>
+          <div class="ba-overlay">
+            <span class="ba-chip before-chip">Before</span>
+            <span class="ba-arrow">→</span>
+            <span class="ba-chip after-chip">After</span>
+          </div>
+        </div>
+        <div class="ba-info">
+          <h4>색소 · 잡티 개선</h4>
+          <p>멜라닌 색소 케어</p>
+          <div class="ba-sessions"><span>✦ 레이저 토닝 복합</span></div>
+        </div>
+      </div>
+
+      <div class="ba-card reveal" data-category="lifting">
+        <div class="ba-single-wrap">
+          <img src="images/instagram/3216089122737836996.jpg" alt="목주름 전후" loading="lazy"/>
+          <div class="ba-overlay">
+            <span class="ba-chip before-chip">Before</span>
+            <span class="ba-arrow">→</span>
+            <span class="ba-chip after-chip">After</span>
+          </div>
+        </div>
+        <div class="ba-info">
+          <h4>목주름 · 탄력 개선</h4>
+          <p>목주름 개선 케어</p>
+          <div class="ba-sessions"><span>✦ HIFU 리프팅</span></div>
+        </div>
+      </div>
+
+      <div class="ba-card reveal" data-category="pore">
+        <div class="ba-single-wrap">
+          <img src="images/instagram/3214623211577157038.jpg" alt="모공 전후" loading="lazy"/>
+          <div class="ba-overlay">
+            <span class="ba-chip before-chip">Before</span>
+            <span class="ba-arrow">→</span>
+            <span class="ba-chip after-chip">After</span>
+          </div>
+        </div>
+        <div class="ba-info">
+          <h4>모공 축소 케어</h4>
+          <p>모공 · 피부결 개선</p>
+          <div class="ba-sessions"><span>✦ 씨파우더 복합</span></div>
+        </div>
+      </div>
+
+      <div class="ba-card reveal" data-category="pore">
+        <div class="ba-single-wrap">
+          <img src="images/instagram/3212477397193349480.jpg" alt="코 모공 전후" loading="lazy"/>
+          <div class="ba-overlay">
+            <span class="ba-chip before-chip">Before</span>
+            <span class="ba-arrow">→</span>
+            <span class="ba-chip after-chip">After</span>
+          </div>
+        </div>
+        <div class="ba-info">
+          <h4>코 모공 개선</h4>
+          <p>T존 · 코 주변 케어</p>
+          <div class="ba-sessions"><span>✦ 모공 복합 케어</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <p style="text-align:center; margin-top:32px; font-size:.8rem; color:var(--mid-gray);">
+      * 위 사진은 실제 고객님의 동의를 받아 게재한 자료이며, 개인차가 있을 수 있습니다.
+    </p>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="container">
+    <div class="about-wrap">
+      <div class="about-img-wrap reveal">
+        <img src="images/director.jpg" alt="김수라 원장" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius);"/>
+        <div class="about-img-deco"></div>
+      </div>
+      <div class="about-content reveal">
+        <p class="section-eyebrow">Director</p>
+        <h2 class="section-title">김수라 원장</h2>
+        <p class="section-desc">
+          "자연스럽게, 그러나 확실하게."<br/>
+          섬세한 관찰과 풍부한 임상 경험을 바탕으로 한 분 한 분의 아름다움을 찾아드립니다.
+        </p>
+        <ul class="about-list">
+          <li>의학 전문 자격 보유 / 미용의학 전문 과정 이수</li>
+          <li>피부 레이저·비수술 리프팅 임상 다년 경력</li>
+          <li>고객 1:1 맞춤 상담 및 치료 계획 수립</li>
+          <li>최소 침습적 방법으로 자연스러운 결과 추구</li>
+          <li>시술 후 지속적인 사후 관리 프로그램 운영</li>
+          <li>네이버 플레이스 5점 만점, 2,277건 이상 리뷰</li>
+        </ul>
+        <div class="about-signature">
+          <div class="sig-avatar">金</div>
+          <div class="sig-text">
+            <h4>김수라 원장 · 피네스테틱</h4>
+            <p>Fi_ne.sthetic — 인천 서구</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESS ── -->
+<section id="process">
+  <div class="container">
+    <p class="section-eyebrow reveal">How It Works</p>
+    <h2 class="section-title reveal">방문부터 사후관리까지</h2>
+    <p class="section-desc reveal">처음 방문하시는 분도 편안하게, 체계적인 4단계 케어 프로세스.</p>
+
+    <div class="process-steps reveal">
+      <div class="process-step">
+        <div class="step-num">STEP 01</div>
+        <h3>1:1 맞춤 상담</h3>
+        <p>피부 타입·고민·목표를 꼼꼼히 청취하고 최적의 시술 플랜을 제안합니다.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">STEP 02</div>
+        <h3>피부 분석</h3>
+        <p>전문 장비를 활용한 정밀 피부 진단으로 객관적인 상태를 파악합니다.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">STEP 03</div>
+        <h3>시술 진행</h3>
+        <p>원장님이 직접 진행하는 섬세한 시술. 편안하고 안전하게 진행됩니다.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">STEP 04</div>
+        <h3>사후 관리</h3>
+        <p>시술 후 피부 상태 모니터링과 홈케어 가이드로 효과를 극대화합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── REVIEWS ── -->
+<section id="reviews">
+  <div class="container">
+    <p class="section-eyebrow reveal">Reviews</p>
+    <h2 class="section-title reveal">고객 후기</h2>
+    <p class="section-desc reveal">직접 방문하신 고객분들의 솔직한 이야기입니다.</p>
+
+    <div class="reviews-track reveal">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">
+          "원장님이 직접 꼼꼼하게 상담해 주시고 제 피부에 맞는 시술을 추천해 주셨어요. 무리하게 권유하지 않으시고 차근차근 설명해 주셔서 믿음이 갔어요. 결과도 정말 만족스럽습니다!"
+        </p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">김○</div>
+          <div class="reviewer-info">
+            <h5>김○○ 님</h5>
+            <span>피부 레이저 토닝 · 네이버 리뷰</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">
+          "리프팅 시술 후 주변에서 살 빠졌냐고 물어봐요 😂 자연스럽게 얼굴이 작아진 느낌이에요. 원장님 손이 정말 섬세하시고 아프지 않게 해주셨어요. 다음 달에 또 예약했습니다."
+        </p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">이○</div>
+          <div class="reviewer-info">
+            <h5>이○○ 님</h5>
+            <span>페이스 리프팅 · 블로그 후기</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">
+          "여드름으로 오래 고민했는데 여기서 진짜 효과를 봤어요. 단순히 짜주는 게 아니라 근본적인 원인을 찾아서 치료해 주시더라고요. 피부가 이렇게 좋아질 수 있다는 걸 처음 알았어요."
+        </p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">박○</div>
+          <div class="reviewer-info">
+            <h5>박○○ 님</h5>
+            <span>여드름 치료 · 네이버 리뷰</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">
+          "필러 처음이라 걱정 많이 했는데 원장님이 너무 자세히 설명해주셔서 안심하고 맞을 수 있었어요. 과하지 않고 딱 자연스럽게 나왔어요. 오히려 안 한 것 같은데 예뻐 보이는 그 느낌!"
+        </p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">최○</div>
+          <div class="reviewer-info">
+            <h5>최○○ 님</h5>
+            <span>자연스러운 필러 · 블로그 후기</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">
+          "인테리어부터 원장님 설명까지 전반적으로 프리미엄 느낌이에요. 같은 시술도 어디서 받느냐에 따라 다르다는 걸 느꼈어요. 결과도 당연히 대만족! 지인들한테 소개했습니다."
+        </p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">정○</div>
+          <div class="reviewer-info">
+            <h5>정○○ 님</h5>
+            <span>피부 관리 · 네이버 리뷰</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── LOCATION ── -->
+<section id="location">
+  <div class="container">
+    <p class="section-eyebrow reveal">Location</p>
+    <h2 class="section-title reveal">오시는 길</h2>
+    <p class="section-desc reveal">인천 서구에 위치한 피네스테틱에 방문하세요.</p>
+
+    <div class="location-wrap reveal" style="grid-template-columns:1fr; max-width:560px; margin:0 auto;">
+      <div class="info-card">
+        <h3>피네스테틱</h3>
+
+        <div class="info-row">
+          <div class="info-icon">📍</div>
+          <div class="info-content">
+            <label>주소</label>
+            <p>인천 서구 건지아베뉴빌딩 99<br/>지하 1층 을동 002호</p>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-icon">🕐</div>
+          <div class="info-content">
+            <label>운영 시간</label>
+            <p>
+              평일 10:00 – 19:00<br/>
+              토요일 10:00 – 17:00<br/>
+              <span style="font-size:.78rem; color:var(--mid-gray)">일요일·공휴일 휴무 (예약 문의 후 조정 가능)</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-icon">🚗</div>
+          <div class="info-content">
+            <label>주차 안내</label>
+            <p>건물 내 주차 가능<br/>
+            <span style="font-size:.78rem; color:var(--mid-gray)">시술 시 주차 할인 제공</span></p>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-icon">📱</div>
+          <div class="info-content">
+            <label>SNS · 온라인</label>
+            <p>Instagram: @fi_ne.sthetic_<br/>
+            네이버 플레이스: 피네스테틱</p>
+          </div>
+        </div>
+
+        <div class="cta-bar">
+          <a class="cta-call" href="tel:032-000-0000">📞 전화 예약</a>
+          <a class="cta-naver" href="https://map.naver.com/p/entry/place/1697275606" target="_blank" rel="noopener">🗺 지도 보기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo"><span>Fi_ne</span>.sthetic</div>
+  <p>인천 서구 건지아베뉴빌딩 99 지하1층 을동 002호</p>
+  <p style="margin-top:4px">© 2026 피네스테틱 · 김수라 원장 · All rights reserved.</p>
+  <p style="margin-top:12px; font-size:.74rem; opacity:.5">본 페이지의 Before &amp; After 사진은 실제 고객님의 동의를 받아 게재되었으며, 시술 효과는 개인차가 있을 수 있습니다.</p>
+</footer>
+
+<script>
+  // ── SCROLL REVEAL ──
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => io.observe(el));
+
+  // ── BA FILTER TABS ──
+  const baTabs = document.querySelectorAll('.ba-tab');
+  const baCards = document.querySelectorAll('.ba-card');
+
+  baTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      baTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const filter = tab.dataset.filter;
+
+      baCards.forEach(card => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.style.display = match ? '' : 'none';
+        if (match) {
+          card.style.animation = 'none';
+          card.offsetHeight; // reflow
+          card.style.animation = '';
+        }
+      });
+    });
+  });
+
+  // ── NAVBAR SHRINK ──
+  const navbar = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    navbar.style.boxShadow = window.scrollY > 20
+      ? '0 2px 20px rgba(0,0,0,.08)' : 'none';
+  });
+
+  // ── SMOOTH ACTIVE NAV LINK ──
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const navIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => {
+          a.style.opacity = a.getAttribute('href') === '#' + entry.target.id ? '1' : '0.75';
+          a.style.fontWeight = a.getAttribute('href') === '#' + entry.target.id ? '700' : '400';
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('section[id]').forEach(s => navIO.observe(s));
+</script>
+</body>
+</html>
