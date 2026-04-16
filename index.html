@@ -501,7 +501,8 @@
     .product-card {
       background: var(--off-white);
       border-radius: 16px;
-      padding: 1.8rem 1.6rem;
+      padding: 0;
+      overflow: hidden;
       position: relative;
       transition: transform .25s, box-shadow .25s;
     }
@@ -509,10 +510,44 @@
       transform: translateY(-4px);
       box-shadow: 0 12px 32px rgba(0,0,0,.08);
     }
-    .product-icon {
-      font-size: 2rem;
-      margin-bottom: .6rem;
+    /* 제품 이미지 영역 */
+    .product-img-wrap {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      position: relative;
     }
+    .product-img-wrap img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      z-index: 1;
+      transition: transform .4s ease;
+    }
+    .product-card:hover .product-img-wrap img { transform: scale(1.06); }
+    /* 이미지 로드 실패 시 보이는 플레이스홀더 */
+    .product-img-ph {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .product-ph-icon { font-size: 3.4rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,.08)); }
+    .product-ph-name {
+      font-size: .72rem;
+      font-weight: 700;
+      color: rgba(0,0,0,.3);
+      letter-spacing: .08em;
+      text-align: center;
+      padding: 0 12px;
+    }
+    .product-body { padding: 1.4rem 1.6rem 1.8rem; }
     .product-badge {
       display: inline-block;
       font-size: .7rem;
@@ -1076,93 +1111,173 @@
     <div class="products-grid reveal">
 
       <div class="product-card">
-        <div class="product-icon">💉</div>
-        <div class="product-badge">베스트셀러</div>
-        <h3 class="product-name">홈슈젝 3단계</h3>
-        <p class="product-sub">홈 슈퍼젝션 홈케어 키트</p>
-        <ul class="product-steps">
-          <li><span class="step-label">STEP 1</span> 스타터 — 오픈 앰플 (피부 흡수 채널 개방)</li>
-          <li><span class="step-label">STEP 2</span> 엑티베이터 — 메인 앰플 (유효성분 집중 공급)</li>
-          <li><span class="step-label">STEP 3</span> 엑티브크림 — 성분 고정 &amp; 마무리</li>
-        </ul>
-        <p class="product-desc">시술 후 집에서도 슈퍼젝션 효과를 유지하는 3단계 프로그램</p>
+        <div class="product-img-wrap" style="background:linear-gradient(135deg,#f5ede0,#e8d5c0)">
+          <img src="https://postfiles.pstatic.net/MjAyNTExMTdfNzcg/MDAxNzYzMzUwMjc1Nzcx.43wnXwumVLYTZE3OAAxVG0T50AxC_q8DhaUSg_EPvfYg.7ZJmBrQ8c8v_ha0vP6n9TJMT3XuZQfri5NYNlNSykq8g.PNG/IMG%EF%BC%BF7353.PNG?type=w773" alt="홈슈젝 3단계" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
+          <div class="product-img-ph">
+            <span class="product-ph-icon">💉</span>
+            <span class="product-ph-name">홈슈젝 3단계</span>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-badge">베스트셀러</div>
+          <h3 class="product-name">홈슈젝 3단계</h3>
+          <p class="product-sub">홈 슈퍼젝션 홈케어 키트</p>
+          <ul class="product-steps">
+            <li><span class="step-label">STEP 1</span> 스타터 — 오픈 앰플 (피부 흡수 채널 개방)</li>
+            <li><span class="step-label">STEP 2</span> 엑티베이터 — 메인 앰플 (유효성분 집중 공급)</li>
+            <li><span class="step-label">STEP 3</span> 엑티브크림 — 성분 고정 &amp; 마무리</li>
+          </ul>
+          <p class="product-desc">시술 후 집에서도 슈퍼젝션 효과를 유지하는 3단계 프로그램</p>
+        </div>
       </div>
 
       <div class="product-card">
-        <div class="product-icon">💧</div>
-        <div class="product-badge">수분케어</div>
-        <h3 class="product-name">비반콴트망카 키트</h3>
-        <p class="product-sub">3STEP 수분 부스터</p>
-        <ul class="product-steps">
-          <li><span class="step-label">STEP 1</span> 오프너 — 수분 통로 개방</li>
-          <li><span class="step-label">STEP 2</span> 플랜터 — 수분 집중 공급</li>
-          <li><span class="step-label">STEP 3</span> 프로텍터 — 수분 잠금 &amp; 보호</li>
-        </ul>
-        <p class="product-desc">속건조·모공·수분통로 개선을 동시에 해결하는 전문 수분케어 키트</p>
+        <div class="product-img-wrap" style="background:linear-gradient(135deg,#e8eef5,#cfdde8)">
+          <img src="https://postfiles.pstatic.net/MjAyNTEwMjNfMTgw/MDAxNzYxMTk5NDk1NTc3.h-NDmv9Q6bsFPrzTzXwGLTLhWl1ciHlHoxyUPrLXejgg.5rltMtd9SU6QfUQbSD8NIbjTsBzD4REjn3WfyWj97I8g.JPEG/IMG%EF%BC%BF6839.jpg?type=w773" alt="비반콴트망카 키트" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
+          <div class="product-img-ph">
+            <span class="product-ph-icon">💧</span>
+            <span class="product-ph-name">비반콴트망카 키트</span>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-badge">수분케어</div>
+          <h3 class="product-name">비반콴트망카 키트</h3>
+          <p class="product-sub">3STEP 수분 부스터</p>
+          <ul class="product-steps">
+            <li><span class="step-label">STEP 1</span> 오프너 — 수분 통로 개방</li>
+            <li><span class="step-label">STEP 2</span> 플랜터 — 수분 집중 공급</li>
+            <li><span class="step-label">STEP 3</span> 프로텍터 — 수분 잠금 &amp; 보호</li>
+          </ul>
+          <p class="product-desc">속건조·모공·수분통로 개선을 동시에 해결하는 전문 수분케어 키트</p>
+        </div>
       </div>
 
       <div class="product-card">
-        <div class="product-icon">✨</div>
-        <div class="product-badge">기능성</div>
-        <h3 class="product-name">비반콴트망카 로션</h3>
-        <p class="product-sub">재생 크림 (구 파이토신 리뉴얼)</p>
-        <p class="product-desc">나이아신아마이드 &amp; 아데노신 추가. 미백·주름개선 2중 기능성 인증. 시술 후 피부 재생과 톤 정돈을 동시에.</p>
+        <div class="product-img-wrap" style="background:linear-gradient(135deg,#f5f0e8,#ede5d8)">
+          <img src="https://postfiles.pstatic.net/MjAyNTA3MTZfMjU3/MDAxNzUyNjQ1ODE2NzQ3.NiOCN5PRBuV6HfbNewmTaBpByaMezDsf4yalWDorOxog.kgCFUL11BccSGxd-B4YPnjysd5IQCl23dmLaD4HL7oYg.PNG/IMG%EF%BC%BF4107.PNG?type=w773" alt="비반콴트망카 로션" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
+          <div class="product-img-ph">
+            <span class="product-ph-icon">✨</span>
+            <span class="product-ph-name">비반콴트망카 로션</span>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-badge">기능성</div>
+          <h3 class="product-name">비반콴트망카 로션</h3>
+          <p class="product-sub">재생 크림 (구 파이토신 리뉴얼)</p>
+          <p class="product-desc">나이아신아마이드 &amp; 아데노신 추가. 미백·주름개선 2중 기능성 인증. 시술 후 피부 재생과 톤 정돈을 동시에.</p>
+        </div>
       </div>
 
       <div class="product-card">
-        <div class="product-icon">🛡️</div>
-        <div class="product-badge">시술 후 필수</div>
-        <h3 class="product-name">파이널밤</h3>
-        <p class="product-sub">재생 비비크림</p>
-        <p class="product-desc">특허 NB P-Complex 성분, 마이크로바이옴 케어, DL-판테놀 함유. 시술 직후에도 메이크업 가능한 재생 비비크림.</p>
+        <div class="product-img-wrap" style="background:linear-gradient(135deg,#ede8e0,#ddd5c8)">
+          <img src="https://postfiles.pstatic.net/MjAyNTA3MDNfMjIw/MDAxNzUxNTA4MDY4Mjc2.2JjeI-5k8xF6nCGmpel5f6rQxOfDT0Z5KqfbNg5hwNMg.5RHalf4KN61Foj8G_zIy5G7oMZbD8cXBFZQRv3waWVUg.JPEG/IMG%EF%BC%BF4060.jpg?type=w773" alt="파이널밤" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
+          <div class="product-img-ph">
+            <span class="product-ph-icon">🛡️</span>
+            <span class="product-ph-name">파이널밤</span>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-badge">시술 후 필수</div>
+          <h3 class="product-name">파이널밤</h3>
+          <p class="product-sub">재생 비비크림</p>
+          <p class="product-desc">특허 NB P-Complex 성분, 마이크로바이옴 케어, DL-판테놀 함유. 시술 직후에도 메이크업 가능한 재생 비비크림.</p>
+        </div>
       </div>
 
       <div class="product-card">
-        <div class="product-icon">🌙</div>
-        <div class="product-badge">수면케어</div>
-        <h3 class="product-name">루티너</h3>
-        <p class="product-sub">수면 필링제</p>
-        <p class="product-desc">AHA 복합산 배합. 자는 동안 블랙헤드·각질·피지를 관리하는 수면 필링제.</p>
+        <div class="product-img-wrap" style="background:linear-gradient(135deg,#eae8f0,#d8d4e8)">
+          <img src="https://postfiles.pstatic.net/MjAyNTA2MDRfNzYg/MDAxNzQ5MDAzNDYzMDk2.nOvLS_fA6bUg6j8oT5NLDP2_qy2NIsg-rKime81FTrkg.ZbmQiuBmUTTEuUbGosR4r0Qvc5o2xWoszVebnALxpiwg.JPEG/IMG%EF%BC%BF2384.JPG?type=w386" alt="루티너" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
+          <div class="product-img-ph">
+            <span class="product-ph-icon">🌙</span>
+            <span class="product-ph-name">루티너</span>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-badge">수면케어</div>
+          <h3 class="product-name">루티너</h3>
+          <p class="product-sub">수면 필링제</p>
+          <p class="product-desc">AHA 복합산 배합. 자는 동안 블랙헤드·각질·피지를 관리하는 수면 필링제.</p>
+        </div>
       </div>
 
       <div class="product-card">
-        <div class="product-icon">🫧</div>
-        <div class="product-badge">모공케어</div>
-        <h3 class="product-name">세멘잘라이트</h3>
-        <p class="product-sub">필러 크림</p>
-        <p class="product-desc">모공을 채우듯 탄력을 채우는 필러 크림. 모공 축소 &amp; 탄력 개선 2-in-1 솔루션.</p>
+        <div class="product-img-wrap" style="background:linear-gradient(135deg,#e8f0ec,#d4e4da)">
+          <img src="https://postfiles.pstatic.net/MjAyNDA3MTZfMjEg/MDAxNzIxMTAxNTA1NTU3.77cU9FpnYRwQVJklCDqYlaxrsu5K1s8rYvFN2qdFHYog.KlRG2T_tSn3PIfumDH3nppzQLjsmuuXCMuGwCzbqJtMg.JPEG/KakaoTalk_20240628_112450270.jpg?type=w773" alt="세멘잘라이트" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
+          <div class="product-img-ph">
+            <span class="product-ph-icon">🫧</span>
+            <span class="product-ph-name">세멘잘라이트</span>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-badge">모공케어</div>
+          <h3 class="product-name">세멘잘라이트</h3>
+          <p class="product-sub">필러 크림</p>
+          <p class="product-desc">모공을 채우듯 탄력을 채우는 필러 크림. 모공 축소 &amp; 탄력 개선 2-in-1 솔루션.</p>
+        </div>
       </div>
 
       <div class="product-card">
-        <div class="product-icon">📋</div>
-        <div class="product-badge">집중케어</div>
-        <h3 class="product-name">세멘시트</h3>
-        <p class="product-sub">모공·피지 케어 시트</p>
-        <p class="product-desc">모공과 피지를 집중 관리하는 전문 케어 시트. 피부결 정돈 &amp; 피지 밸런스 조절.</p>
+        <div class="product-img-wrap" style="background:linear-gradient(135deg,#f0ece0,#e4d8c4)">
+          <img src="https://postfiles.pstatic.net/MjAyNDA3MDlfMTA3/MDAxNzIwNTA4NTQ0MjU4._x3saV7V26gyk5uf88KqSJBYDK4nJIlXtDKNT0--ocEg.k27RcCtNQtwJH2itsR7MhdWJU8D3O2jcIfNK-7djtpog.JPEG/IMG_4451.jpg?type=w773" alt="세멘시트" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
+          <div class="product-img-ph">
+            <span class="product-ph-icon">📋</span>
+            <span class="product-ph-name">세멘시트</span>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-badge">집중케어</div>
+          <h3 class="product-name">세멘시트</h3>
+          <p class="product-sub">모공·피지 케어 시트</p>
+          <p class="product-desc">모공과 피지를 집중 관리하는 전문 케어 시트. 피부결 정돈 &amp; 피지 밸런스 조절.</p>
+        </div>
       </div>
 
       <div class="product-card">
-        <div class="product-icon">🔬</div>
-        <div class="product-badge">트러블케어</div>
-        <h3 class="product-name">픽사드 키트</h3>
-        <p class="product-sub">속건조·탄력·좁쌀 개선</p>
-        <p class="product-desc">속건조, 탄력 저하, 좁쌀 트러블을 동시에 개선하는 복합 케어 키트.</p>
+        <div class="product-img-wrap" style="background:linear-gradient(135deg,#f5e8ec,#e8d0d8)">
+          <img src="https://postfiles.pstatic.net/MjAyNDExMDZfMjc0/MDAxNzMwODczOTIxNDYw.OX1Xv1u5c99lUn2DCN5JMnHM0AzPs4KpJoLbEi5nQG4g.uXUlrZE7LEDOWhKDgNGxNrFEQHeBhESnqH9UQ70tHwQg.JPEG/output_1559731769.jpg?type=w773" alt="픽사드 키트" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
+          <div class="product-img-ph">
+            <span class="product-ph-icon">🔬</span>
+            <span class="product-ph-name">픽사드 키트</span>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-badge">트러블케어</div>
+          <h3 class="product-name">픽사드 키트</h3>
+          <p class="product-sub">속건조·탄력·좁쌀 개선</p>
+          <p class="product-desc">속건조, 탄력 저하, 좁쌀 트러블을 동시에 개선하는 복합 케어 키트.</p>
+        </div>
       </div>
 
       <div class="product-card">
-        <div class="product-icon">💆</div>
-        <div class="product-badge">두피케어</div>
-        <h3 class="product-name">크레시나</h3>
-        <p class="product-sub">두피 앰플</p>
-        <p class="product-desc">탈모 예방 전문 두피 앰플. 두피 영양 공급과 모발 강화를 위한 집중 케어.</p>
+        <div class="product-img-wrap" style="background:linear-gradient(135deg,#e8ede4,#d4ddd0)">
+          <img src="https://postfiles.pstatic.net/MjAyNTAyMDdfMzAg/MDAxNzM4ODkzMTY1MTgw.GbTjGcemrxCbNdibgb7Cxpxb1JDcvqYtg3JcCQCc8hYg.-mg9VyRWVkoz_MCkKLGu9AzdUBZnh_iBGShTLV3Yx20g.PNG/23.png?type=w773" alt="크레시나" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
+          <div class="product-img-ph">
+            <span class="product-ph-icon">💆</span>
+            <span class="product-ph-name">크레시나</span>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-badge">두피케어</div>
+          <h3 class="product-name">크레시나</h3>
+          <p class="product-sub">두피 앰플</p>
+          <p class="product-desc">탈모 예방 전문 두피 앰플. 두피 영양 공급과 모발 강화를 위한 집중 케어.</p>
+        </div>
       </div>
 
       <div class="product-card">
-        <div class="product-icon">☀️</div>
-        <div class="product-badge">선케어</div>
-        <h3 class="product-name">피니쉬 로션</h3>
-        <p class="product-sub">재생 선크림</p>
-        <p class="product-desc">피부 장벽을 강화하면서 자외선 차단까지. 시술 후 예민해진 피부를 보호하는 재생 선크림.</p>
+        <div class="product-img-wrap" style="background:linear-gradient(135deg,#f5f0d8,#ede4b8)">
+          <img src="https://postfiles.pstatic.net/MjAyNDA3MTlfNzIg/MDAxNzIxMzc1MTkwMTQw.-XaZQ4PwxhXHZJ_goUdHzRw1hvKhsLT4sEU_jo0-StUg.50IxqZzy7-F1NRC_HxoW1EVtKXmOHjqG-LNRebKK5ksg.JPEG/IMG_8101.jpg?type=w773" alt="피니쉬 로션" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'">
+          <div class="product-img-ph">
+            <span class="product-ph-icon">☀️</span>
+            <span class="product-ph-name">피니쉬 로션</span>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-badge">선케어</div>
+          <h3 class="product-name">피니쉬 로션</h3>
+          <p class="product-sub">재생 선크림</p>
+          <p class="product-desc">피부 장벽을 강화하면서 자외선 차단까지. 시술 후 예민해진 피부를 보호하는 재생 선크림.</p>
+        </div>
       </div>
 
     </div>
