@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Audit 진행 현황 | 삼일PwC</title>
+  <style>
+    :root {
+      --red: #E31837;
+      --red-dk: #B01229;
+      --red-lt: #FBEAED;
+      --white: #FFFFFF;
+      --off: #F7F7F7;
+      --lt: #F0F0F0;
+      --mid: #D0D0D0;
+      --gray: #767676;
+      --dark: #2D2D2D;
+      --text: #333333;
+      --green: #00843D;
+      --green-lt: #E6F4EE;
+      --orange: #E65100;
+      --orange-lt: #FFF3E0;
+      --blue: #0070C0;
+      --blue-lt: #E3F2FD;
+      --purple: #6A1B9A;
+      --purple-lt: #F3E5F5;
+      --shadow: 0 1px 4px rgba(0,0,0,0.1);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.15);
+      --r: 3px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', '맑은 고딕', sans-serif; background: var(--off); color: var(--text); font-size: 13px; line-height: 1.5; }
+
+    /* ── Header ── */
+    .hdr { background: var(--red); color: #fff; padding: 0 24px; height: 54px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 6px rgba(0,0,0,0.25); }
+    .hdr-brand { display: flex; align-items: center; gap: 12px; }
+    .pwc-logo { font-size: 21px; font-weight: 800; letter-spacing: -0.5px; }
+    .hdr-sep { width: 1px; height: 24px; background: rgba(255,255,255,0.35); }
+    .hdr-title { font-size: 13px; font-weight: 400; opacity: .9; }
+    .hdr-right { font-size: 11px; opacity: .8; text-align: right; line-height: 1.4; }
+
+    /* ── Tab Nav ── */
+    .tab-nav { background: #fff; border-bottom: 1px solid var(--mid); padding: 0 24px; display: flex; align-items: center; gap: 2px; position: sticky; top: 54px; z-index: 190; }
+    .tab-nav button { padding: 13px 18px; border: none; background: none; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--gray); border-bottom: 3px solid transparent; transition: all .15s; white-space: nowrap; }
+    .tab-nav button:hover { color: var(--red); }
+    .tab-nav button.active { color: var(--red); border-bottom-color: var(--red); font-weight: 700; }
+
+    /* ── Layout ── */
+    .main { padding: 22px 24px; max-width: 1680px; margin: 0 auto; }
+    .tab-pane { display: none; } .tab-pane.active { display: block; }
+
+    /* ── Cards ── */
+    .card { background: #fff; border-radius: var(--r); box-shadow: var(--shadow); padding: 18px 20px; margin-bottom: 18px; }
+    .card-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--red); }
+    .card-hd h3 { font-size: 14px; font-weight: 700; color: var(--dark); }
+    .card-hd .card-actions { display: flex; gap: 8px; align-items: center; }
+
+    /* ── KPI Grid ── */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 18px; }
+    .kpi { background: #fff; border-radius: var(--r); padding: 14px 18px; box-shadow: var(--shadow); border-left: 4px solid var(--red); }
+    .kpi.green { border-left-color: var(--green); }
+    .kpi.orange { border-left-color: var(--orange); }
+    .kpi.blue { border-left-color: var(--blue); }
+    .kpi.purple { border-left-color: var(--purple); }
+    .kpi-lbl { font-size: 10px; text-transform: uppercase; letter-spacing: .6px; color: var(--gray); margin-bottom: 6px; font-weight: 600; }
+    .kpi-val { font-size: 30px; font-weight: 800; color: var(--dark); line-height: 1; }
+    .kpi-sub { font-size: 11px; color: var(--gray); margin-top: 5px; }
+
+    /* ── Domain Grid ── */
+    .domain-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 18px; }
+    .dom-card { background: #fff; border-radius: var(--r); padding: 18px; box-shadow: var(--shadow); }
+    .dom-tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; margin-bottom: 8px; }
+    .tag-apd { background: var(--blue-lt); color: var(--blue); }
+    .tag-pc  { background: var(--green-lt); color: var(--green); }
+    .tag-co  { background: var(--orange-lt); color: var(--orange); }
+    .tag-pd  { background: var(--purple-lt); color: var(--purple); }
+    .tag-itac { background: #FFF9C4; color: #F57F17; }
+    .dom-name { font-weight: 700; font-size: 13px; margin-bottom: 2px; }
+    .dom-sub { font-size: 11px; color: var(--gray); margin-bottom: 10px; }
+    .dom-stat { display: flex; justify-content: space-between; font-size: 11px; color: var(--gray); margin-bottom: 4px; }
+    .pb { height: 6px; background: var(--lt); border-radius: 3px; overflow: hidden; }
+    .pb-fill { height: 100%; border-radius: 3px; transition: width .4s ease; }
+    .fill-green { background: var(--green); }
+    .fill-orange { background: var(--orange); }
+    .fill-red { background: var(--red); }
+    .fill-blue { background: var(--blue); }
+
+    /* ── Staff Grid ── */
+    .staff-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px,1fr)); gap: 14px; }
+    .staff-card { background: #fff; border-radius: var(--r); padding: 16px; box-shadow: var(--shadow); }
+    .staff-av { width: 38px; height: 38px; border-radius: 50%; background: var(--red); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; margin-bottom: 10px; }
+    .staff-name { font-weight: 700; font-size: 14px; }
+    .staff-role { font-size: 11px; color: var(--gray); margin-bottom: 10px; }
+    .staff-dom { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 8px; }
+    .staff-tag { padding: 2px 7px; border-radius: 10px; font-size: 10px; font-weight: 600; }
+
+    /* ── Tables ── */
+    .tbl-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 900px; }
+    thead th { background: #F5F5F5; padding: 9px 11px; text-align: left; font-weight: 700; color: var(--dark); border-bottom: 2px solid var(--mid); white-space: nowrap; font-size: 11px; text-transform: uppercase; letter-spacing: .4px; }
+    tbody td { padding: 9px 11px; border-bottom: 1px solid #F0F0F0; vertical-align: middle; }
+    tbody tr:hover td { background: #FAFAFA; }
+    tbody tr.row-sel td { background: var(--red-lt); }
+
+    /* ── Domain filter tabs ── */
+    .dom-tabs { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; align-items: center; }
+    .dom-tab { padding: 5px 14px; border: 1px solid var(--mid); background: #fff; border-radius: 20px; cursor: pointer; font-size: 12px; font-weight: 500; color: var(--gray); transition: all .15s; }
+    .dom-tab:hover { border-color: var(--red); color: var(--red); }
+    .dom-tab.active { background: var(--red); color: #fff; border-color: var(--red); }
+
+    /* ── Status badges ── */
+    .sb { display: inline-block; padding: 2px 9px; border-radius: 10px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+    .sb-ns  { background: #EEEEEE; color: #616161; }
+    .sb-ip  { background: var(--blue-lt); color: var(--blue); }
+    .sb-rv  { background: var(--orange-lt); color: var(--orange); }
+    .sb-ok  { background: var(--green-lt); color: var(--green); }
+    .sb-ex  { background: #FFEBEE; color: #C62828; }
+
+    /* Sub-status dot */
+    .sdot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+    .sdot-ns { background: #BDBDBD; } .sdot-ip { background: var(--blue); } .sdot-ok { background: var(--green); }
+    .sdot-ex { background: var(--red); }
+
+    /* Auto badge */
+    .ab { display: inline-block; padding: 2px 7px; border-radius: 3px; font-size: 10px; font-weight: 700; }
+    .ab-y { background: var(--green-lt); color: var(--green); }
+    .ab-n { background: #F5F5F5; color: #757575; }
+    .ab-s { background: var(--orange-lt); color: var(--orange); }
+
+    /* Inline progress */
+    .ipb { display: flex; align-items: center; gap: 7px; }
+    .ipb-bar { flex: 1; height: 5px; background: var(--lt); border-radius: 3px; overflow: hidden; min-width: 50px; }
+    .ipb-fill { height: 100%; border-radius: 3px; }
+    .pct { font-size: 11px; font-weight: 700; color: var(--gray); min-width: 32px; text-align: right; }
+
+    /* Buttons */
+    .btn { padding: 6px 14px; border-radius: var(--r); border: none; cursor: pointer; font-size: 12px; font-weight: 600; transition: all .15s; }
+    .btn-r { background: var(--red); color: #fff; } .btn-r:hover { background: var(--red-dk); }
+    .btn-o { background: #fff; color: var(--red); border: 1px solid var(--red); } .btn-o:hover { background: var(--red); color: #fff; }
+    .btn-g { background: #fff; color: var(--gray); border: 1px solid var(--mid); } .btn-g:hover { background: var(--lt); }
+    .btn-sm { padding: 4px 10px; font-size: 11px; }
+    .btn-icon { padding: 4px 8px; font-size: 14px; }
+
+    /* Modal */
+    .mo { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 1000; align-items: center; justify-content: center; }
+    .mo.open { display: flex; }
+    .mo-box { background: #fff; border-radius: var(--r); padding: 24px; width: 90%; max-width: 520px; box-shadow: var(--shadow-md); max-height: 90vh; overflow-y: auto; }
+    .mo-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--red); }
+    .mo-hd h3 { font-size: 15px; font-weight: 700; }
+    .mo-close { background: none; border: none; font-size: 20px; cursor: pointer; color: var(--gray); line-height: 1; }
+    .mo-ft { display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--lt); }
+
+    /* Form */
+    .fg { margin-bottom: 14px; }
+    .fl { display: block; font-size: 12px; font-weight: 600; color: var(--dark); margin-bottom: 5px; }
+    .fi { width: 100%; padding: 7px 11px; border: 1px solid var(--mid); border-radius: var(--r); font-size: 13px; transition: border-color .15s; }
+    .fi:focus { outline: none; border-color: var(--red); }
+    select.fi { background: #fff; cursor: pointer; }
+    textarea.fi { resize: vertical; min-height: 70px; }
+
+    /* Detail rows */
+    .dl { display: flex; gap: 8px; margin-bottom: 8px; }
+    .dt { font-size: 12px; color: var(--gray); font-weight: 500; min-width: 130px; flex-shrink: 0; }
+    .dd { font-size: 12px; }
+    .section-lbl { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--gray); margin: 14px 0 8px; }
+
+    /* Exception icon */
+    .exc { color: var(--red); font-weight: 700; }
+    .no-exc { color: #BDBDBD; }
+
+    /* Column delete btn in header */
+    .col-del { background: none; border: none; color: #CCCCCC; cursor: pointer; padding: 0 3px; font-size: 12px; line-height: 1; vertical-align: middle; }
+    .col-del:hover { color: var(--red); }
+
+    /* Editable cell */
+    .ec { cursor: text; min-width: 90px; }
+    .ec input, .ec-in { width: 100%; border: 1px solid var(--mid); padding: 3px 6px; border-radius: 3px; font-size: 12px; font-family: inherit; }
+    .ec input:focus { outline: none; border-color: var(--red); }
+
+    /* Status select inline */
+    .st-sel { border: 1px solid var(--mid); border-radius: 10px; padding: 2px 6px; font-size: 11px; font-weight: 600; background: #fff; cursor: pointer; }
+
+    /* Substatus cells */
+    .ssc { display: flex; align-items: center; gap: 5px; }
+    .ssc select { border: none; background: none; font-size: 11px; cursor: pointer; padding: 0; color: var(--text); }
+
+    /* Info bar */
+    .ib { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+    .ib-l { display: flex; align-items: center; gap: 10px; }
+    .cnt { font-size: 12px; color: var(--gray); }
+
+    /* Legend */
+    .legend { display: flex; gap: 14px; flex-wrap: wrap; }
+    .leg-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--gray); }
+
+    /* Summary table in detail */
+    .smry { width: 100%; font-size: 12px; border-collapse: collapse; margin-top: 6px; }
+    .smry td { padding: 5px 8px; border: 1px solid var(--lt); }
+    .smry tr:nth-child(even) td { background: var(--off); }
+
+    @media (max-width: 900px) {
+      .domain-grid { grid-template-columns: repeat(2,1fr); }
+      .kpi-grid { grid-template-columns: repeat(2,1fr); }
+      .main { padding: 12px 14px; }
+      .hdr { padding: 0 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="hdr">
+  <div class="hdr-brand">
+    <div class="pwc-logo">PwC</div>
+    <div class="hdr-sep"></div>
+    <div class="hdr-title">IT Audit 진행 현황 관리</div>
+  </div>
+  <div class="hdr-right">
+    <div>삼일PwC · IT Audit Team</div>
+    <div id="hdr-date"></div>
+  </div>
+</header>
+
+<!-- ── Tab Navigation ── -->
+<nav class="tab-nav">
+  <button class="active" onclick="switchTab('dashboard', this)">📊 대시보드</button>
+  <button onclick="switchTab('itgc', this)">🔒 ITGC</button>
+  <button onclick="switchTab('itac', this)">⚙️ ITAC</button>
+</nav>
+
+<main class="main">
+
+  <!-- ══════════ DASHBOARD ══════════ -->
+  <div id="pane-dashboard" class="tab-pane active">
+    <!-- KPI -->
+    <div class="kpi-grid" id="kpi-area"></div>
+
+    <!-- Domain Progress + Staff -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;">
+
+      <div class="card">
+        <div class="card-hd"><h3>ITGC 도메인별 진행률</h3></div>
+        <div id="domain-prog"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-hd"><h3>ITAC 진행 현황</h3></div>
+        <div id="itac-prog"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-hd"><h3>담당자별 현황</h3></div>
+      <div class="staff-grid" id="staff-area"></div>
+    </div>
+
+    <!-- Status legend -->
+    <div class="card" style="padding:14px 20px;">
+      <div class="legend">
+        <div class="leg-item"><span class="sb sb-ns">미착수</span> 시작 전</div>
+        <div class="leg-item"><span class="sb sb-ip">진행중</span> 테스트 수행 중</div>
+        <div class="leg-item"><span class="sb sb-rv">검토중</span> Manager 검토 대기</div>
+        <div class="leg-item"><span class="sb sb-ok">완료</span> Sign-off 완료</div>
+        <div class="leg-item"><span class="sb sb-ex">이슈있음</span> 예외사항 발견</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ ITGC ══════════ -->
+  <div id="pane-itgc" class="tab-pane">
+    <div class="domain-grid" id="dom-summary"></div>
+
+    <div class="card">
+      <div class="card-hd">
+        <h3>ITGC 통제 현황</h3>
+        <div class="card-actions">
+          <span id="itgc-cnt" class="cnt"></span>
+          <button class="btn btn-o btn-sm" onclick="openAddCol('itgc')">＋ 열 추가</button>
+        </div>
+      </div>
+
+      <!-- Domain filter -->
+      <div class="dom-tabs" id="dom-filter">
+        <button class="dom-tab active" onclick="filterDomain('ALL',this)">전체</button>
+        <button class="dom-tab" onclick="filterDomain('APD',this)">APD <span style="color:var(--blue)">·</span> 변경관리</button>
+        <button class="dom-tab" onclick="filterDomain('PC',this)">PC <span style="color:var(--green)">·</span> 접근통제</button>
+        <button class="dom-tab" onclick="filterDomain('CO',this)">CO <span style="color:var(--orange)">·</span> 운영통제</button>
+        <button class="dom-tab" onclick="filterDomain('PD',this)">PD <span style="color:var(--purple)">·</span> 문제관리</button>
+      </div>
+
+      <div class="tbl-wrap">
+        <table id="itgc-tbl">
+          <thead id="itgc-thead"></thead>
+          <tbody id="itgc-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ ITAC ══════════ -->
+  <div id="pane-itac" class="tab-pane">
+    <div class="card">
+      <div class="card-hd">
+        <h3>ITAC 응용 통제 현황</h3>
+        <div class="card-actions">
+          <span id="itac-cnt" class="cnt"></span>
+          <button class="btn btn-o btn-sm" onclick="openAddCol('itac')">＋ 열 추가</button>
+        </div>
+      </div>
+
+      <div class="dom-tabs" id="itac-proc-filter">
+        <button class="dom-tab active" onclick="filterProc('ALL',this)">전체</button>
+        <button class="dom-tab" onclick="filterProc('수익',this)">수익 (Revenue)</button>
+        <button class="dom-tab" onclick="filterProc('구매',this)">구매/지출</button>
+        <button class="dom-tab" onclick="filterProc('급여',this)">급여</button>
+        <button class="dom-tab" onclick="filterProc('재고',this)">재고/자산</button>
+        <button class="dom-tab" onclick="filterProc('재무',this)">재무마감</button>
+      </div>
+
+      <div class="tbl-wrap">
+        <table id="itac-tbl">
+          <thead id="itac-thead"></thead>
+          <tbody id="itac-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ── Modal: Add Column ── -->
+<div class="mo" id="mo-addcol">
+  <div class="mo-box">
+    <div class="mo-hd">
+      <h3>추가 검토 열 추가</h3>
+      <button class="mo-close" onclick="closeModal('mo-addcol')">✕</button>
+    </div>
+    <div class="fg">
+      <label class="fl">열 이름 (추가 검토 항목명)</label>
+      <input class="fi" id="addcol-name" type="text" placeholder="예: 추가증빙 요청, 전문가 의견, 이슈 내용 등">
+    </div>
+    <div class="fg">
+      <label class="fl">입력 형식</label>
+      <select class="fi" id="addcol-type">
+        <option value="text">텍스트 자유 입력</option>
+        <option value="status">상태 선택 (Y/N/N/A)</option>
+        <option value="date">날짜</option>
+      </select>
+    </div>
+    <div class="mo-ft">
+      <button class="btn btn-g" onclick="closeModal('mo-addcol')">취소</button>
+      <button class="btn btn-r" onclick="confirmAddCol()">추가</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Modal: Control Detail ── -->
+<div class="mo" id="mo-detail">
+  <div class="mo-box" style="max-width:640px;">
+    <div class="mo-hd">
+      <h3 id="det-title">통제 상세</h3>
+      <button class="mo-close" onclick="closeModal('mo-detail')">✕</button>
+    </div>
+    <div id="det-body"></div>
+    <div class="mo-ft">
+      <button class="btn btn-g" onclick="closeModal('mo-detail')">닫기</button>
+      <button class="btn btn-r" id="det-save-btn">저장</button>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+// ══════════════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════════════
+
+const STAFF = [
+  { id:'kmj', name:'김민준', role:'Senior Associate', initials:'민준', domains:['APD','PC'], color:'#1565C0' },
+  { id:'lsy', name:'이서연', role:'Associate',        initials:'서연', domains:['CO','PD'],  color:'#2E7D32' },
+  { id:'pdh', name:'박도현', role:'Associate',        initials:'도현', domains:['ITAC'],      color:'#6A1B9A' },
+  { id:'cjw', name:'최지우', role:'Junior Associate', initials:'지우', domains:['PC','APD'], color:'#E65100' },
+];
+
+const DEFAULT_ITGC = [
+  // ── APD ──
+  { id:'APD-01', domain:'APD', name:'변경요청 및 승인',     obj:'모든 IT 변경이 공식 절차에 따라 요청 및 승인됨',              owner:'김민준', popType:'거래 기반', popDesc:'연간 변경 티켓 수',       isAuto:false, popSize:'156건', sample:25, status:'in-progress', ev:'completed', test:'in-progress', rev:'not-started', pct:65, exc:false, notes:'' },
+  { id:'APD-02', domain:'APD', name:'변경 테스트 수행',      obj:'배포 전 공식 테스트 수행 및 테스트 결과 문서화',              owner:'김민준', popType:'거래 기반', popDesc:'변경 티켓 수',             isAuto:false, popSize:'156건', sample:25, status:'in-progress', ev:'completed', test:'in-progress', rev:'not-started', pct:70, exc:false, notes:'' },
+  { id:'APD-03', domain:'APD', name:'변경 배포 승인',        obj:'승인된 변경만 운영 환경에 배포됨',                           owner:'최지우', popType:'거래 기반', popDesc:'릴리즈 배포 건수',        isAuto:false, popSize:'48건',  sample:20, status:'in-progress', ev:'in-progress', test:'not-started', rev:'not-started', pct:40, exc:false, notes:'' },
+  { id:'APD-04', domain:'APD', name:'긴급변경 관리',         obj:'긴급변경 시 소급 승인 및 문서화 절차 준수',                  owner:'김민준', popType:'거래 기반', popDesc:'긴급변경 티켓 수',        isAuto:false, popSize:'12건',  sample:12, status:'under-review', ev:'completed', test:'completed', rev:'in-progress', pct:85, exc:true, notes:'일부 긴급변경 소급승인 지연 확인' },
+  { id:'APD-05', domain:'APD', name:'개발/운영 환경 분리',   obj:'개발·테스트 환경과 운영 환경이 물리적/논리적으로 분리됨',    owner:'최지우', popType:'설정 기반', popDesc:'N/A (시스템 설정 검토)', isAuto:true,  popSize:'N/A',   sample:null,status:'completed',   ev:'completed', test:'completed', rev:'completed',   pct:100, exc:false, notes:'' },
+
+  // ── PC ──
+  { id:'PC-01', domain:'PC', name:'신규 사용자 접근권한 부여', obj:'신규 입사자에 대해 직무에 적합한 최소권한 부여',              owner:'김민준', popType:'사용자 기반', popDesc:'연간 신규입사자 수',     isAuto:false, popSize:'87명',   sample:25, status:'in-progress', ev:'completed', test:'in-progress', rev:'not-started', pct:72, exc:false, notes:'' },
+  { id:'PC-02', domain:'PC', name:'퇴직자 접근권한 회수',      obj:'퇴직 당일 또는 익일 내 모든 시스템 접근권한 회수',          owner:'김민준', popType:'사용자 기반', popDesc:'연간 퇴직자 수',          isAuto:false, popSize:'64명',   sample:25, status:'under-review', ev:'completed', test:'completed', rev:'in-progress', pct:88, exc:true, notes:'3건 퇴직 익일 이후 회수 지연 확인' },
+  { id:'PC-03', domain:'PC', name:'접근권한 정기 검토',        obj:'전체 사용자 접근권한의 반기별 적정성 검토',                  owner:'최지우', popType:'사용자 기반', popDesc:'전체 사용자 수',           isAuto:false, popSize:'1,245명',sample:60, status:'in-progress', ev:'in-progress', test:'not-started', rev:'not-started', pct:35, exc:false, notes:'반기 검토 목록 수령 완료' },
+  { id:'PC-04', domain:'PC', name:'특권사용자 접근 관리',      obj:'특권계정(Admin/DBA)의 접근이 필요 최소한으로 통제됨',       owner:'최지우', popType:'사용자 기반', popDesc:'특권계정 수 (전수)',       isAuto:false, popSize:'23개',   sample:23, status:'in-progress', ev:'completed', test:'in-progress', rev:'not-started', pct:60, exc:false, notes:'' },
+  { id:'PC-05', domain:'PC', name:'패스워드 정책 적용',        obj:'시스템 패스워드 정책(복잡도·주기 등) 설정 적정성',          owner:'김민준', popType:'설정 기반', popDesc:'N/A (시스템 설정 검토)',   isAuto:true,  popSize:'N/A',    sample:null,status:'completed',   ev:'completed', test:'completed', rev:'completed',   pct:100, exc:false, notes:'' },
+  { id:'PC-06', domain:'PC', name:'물리적 접근통제',           obj:'데이터센터 물리적 접근이 승인된 인원으로 제한됨',            owner:'이서연', popType:'기간 기반', popDesc:'월별 접근 기록 (12개월)', isAuto:false, popSize:'12건',   sample:12, status:'not-started', ev:'not-started', test:'not-started', rev:'not-started', pct:0, exc:false, notes:'현장 방문 일정 조율 중' },
+
+  // ── CO ──
+  { id:'CO-01', domain:'CO', name:'데이터 백업 및 복구 테스트', obj:'데이터 백업이 스케줄에 따라 수행되고 복구 테스트 실시',     owner:'이서연', popType:'기간 기반', popDesc:'백업 스케줄 (일/주/월)',  isAuto:true,  popSize:'365건',  sample:15, status:'completed',   ev:'completed', test:'completed', rev:'completed',   pct:100, exc:false, notes:'' },
+  { id:'CO-02', domain:'CO', name:'시스템 모니터링 및 경보',    obj:'임계치 초과·장애 발생 시 자동 경보 및 에스컬레이션',        owner:'이서연', popType:'설정 기반', popDesc:'N/A (시스템 설정 검토)', isAuto:true,  popSize:'N/A',    sample:null,status:'completed',   ev:'completed', test:'completed', rev:'completed',   pct:100, exc:false, notes:'' },
+  { id:'CO-03', domain:'CO', name:'배치작업 오류 모니터링',     obj:'배치 실패·오류에 대한 적시 인지 및 조치',                   owner:'이서연', popType:'거래 기반', popDesc:'배치 오류 발생 건수',     isAuto:false, popSize:'234건',  sample:20, status:'in-progress', ev:'completed', test:'in-progress', rev:'not-started', pct:68, exc:false, notes:'' },
+  { id:'CO-04', domain:'CO', name:'데이터센터 환경통제',        obj:'온도·습도·전원·소화설비 등 환경통제 설정 적정성',           owner:'이서연', popType:'기간 기반', popDesc:'분기별 점검 결과 (4건)',  isAuto:false, popSize:'4건',    sample:4,  status:'in-progress', ev:'completed', test:'not-started', rev:'not-started', pct:40, exc:false, notes:'' },
+  { id:'CO-05', domain:'CO', name:'용량 관리',                  obj:'시스템 자원 사용률 임계치 관리 및 계획 수립',               owner:'이서연', popType:'기간 기반', popDesc:'월별 용량 보고서 (12건)', isAuto:true,  popSize:'12건',   sample:12, status:'in-progress', ev:'in-progress', test:'not-started', rev:'not-started', pct:30, exc:false, notes:'용량 보고서 요청 발송 완료' },
+
+  // ── PD ──
+  { id:'PD-01', domain:'PD', name:'인시던트 관리 절차',        obj:'인시던트 발생 시 분류·에스컬레이션·해결·종료 절차 준수',    owner:'이서연', popType:'거래 기반', popDesc:'연간 인시던트 티켓 수',  isAuto:false, popSize:'412건',  sample:25, status:'under-review', ev:'completed', test:'completed', rev:'in-progress', pct:90, exc:false, notes:'' },
+  { id:'PD-02', domain:'PD', name:'문제 관리 절차',             obj:'반복 인시던트의 근본원인 분석 및 재발 방지 계획 수립',      owner:'이서연', popType:'거래 기반', popDesc:'연간 Problem 티켓 수',   isAuto:false, popSize:'45건',   sample:25, status:'in-progress', ev:'completed', test:'in-progress', rev:'not-started', pct:65, exc:false, notes:'' },
+  { id:'PD-03', domain:'PD', name:'SLA 모니터링',               obj:'서비스 가용성·응답시간 등 SLA 지표 정기 모니터링',          owner:'이서연', popType:'기간 기반', popDesc:'월별 SLA 보고서 (12건)', isAuto:false, popSize:'12건',   sample:12, status:'in-progress', ev:'in-progress', test:'not-started', rev:'not-started', pct:25, exc:false, notes:'' },
+  { id:'PD-04', domain:'PD', name:'재해복구 계획(DRP) 훈련',   obj:'연간 DRP 훈련 수행 및 결과 문서화',                          owner:'이서연', popType:'기간 기반', popDesc:'연간 훈련 결과 (1건)',    isAuto:false, popSize:'1건',    sample:1,  status:'not-started', ev:'not-started', test:'not-started', rev:'not-started', pct:0, exc:false, notes:'훈련 계획 수령 대기 중' },
+];
+
+const DEFAULT_ITAC = [
+  { id:'AC-01', proc:'수익', app:'ERP (SAP)',       name:'매출 인식 자동 계산',       type:'처리통제', isAuto:true,  owner:'박도현', status:'completed',   ev:'completed', test:'completed', rev:'completed',   pct:100, exc:false, notes:'' },
+  { id:'AC-02', proc:'수익', app:'ERP (SAP)',       name:'수익 인식 기간 컷오프 통제',type:'처리통제', isAuto:false, owner:'박도현', status:'in-progress', ev:'completed', test:'in-progress', rev:'not-started', pct:68, exc:false, notes:'' },
+  { id:'AC-03', proc:'수익', app:'Billing System',  name:'청구금액 계산 검증',        type:'출력통제', isAuto:true,  owner:'박도현', status:'under-review', ev:'completed', test:'completed', rev:'in-progress', pct:88, exc:false, notes:'' },
+  { id:'AC-04', proc:'구매', app:'ERP (SAP)',       name:'3-Way Matching 자동 검증',  type:'처리통제', isAuto:true,  owner:'박도현', status:'completed',   ev:'completed', test:'completed', rev:'completed',   pct:100, exc:false, notes:'' },
+  { id:'AC-05', proc:'구매', app:'ERP (SAP)',       name:'구매 한도 승인 워크플로우', type:'입력통제', isAuto:true,  owner:'박도현', status:'completed',   ev:'completed', test:'completed', rev:'completed',   pct:100, exc:false, notes:'' },
+  { id:'AC-06', proc:'구매', app:'ERP (SAP)',       name:'전표 자동 분개 검증',       type:'처리통제', isAuto:true,  owner:'박도현', status:'in-progress', ev:'completed', test:'not-started', rev:'not-started', pct:40, exc:false, notes:'인터페이스 로그 수령 완료' },
+  { id:'AC-07', proc:'급여', app:'HR System',       name:'급여 계산 자동화',          type:'처리통제', isAuto:true,  owner:'박도현', status:'completed',   ev:'completed', test:'completed', rev:'completed',   pct:100, exc:false, notes:'' },
+  { id:'AC-08', proc:'급여', app:'HR System',       name:'급여 지급 이중승인 통제',   type:'입력통제', isAuto:false, owner:'박도현', status:'in-progress', ev:'completed', test:'in-progress', rev:'not-started', pct:72, exc:true,  notes:'1건 단독 승인 건 확인 → 추가 조사 중' },
+  { id:'AC-09', proc:'재고', app:'WMS',             name:'재고 수량 자동 차감',       type:'처리통제', isAuto:true,  owner:'최지우', status:'in-progress', ev:'in-progress', test:'not-started', rev:'not-started', pct:35, exc:false, notes:'' },
+  { id:'AC-10', proc:'재고', app:'ERP (SAP)',       name:'재고 평가 자동 계산 (FIFO)',type:'처리통제', isAuto:true,  owner:'최지우', status:'in-progress', ev:'completed', test:'in-progress', rev:'not-started', pct:58, exc:false, notes:'' },
+  { id:'AC-11', proc:'재고', app:'ERP (SAP)',       name:'재고 실사 차이 자동 조정',  type:'처리통제', isAuto:false, owner:'최지우', status:'not-started', ev:'not-started', test:'not-started', rev:'not-started', pct:0, exc:false, notes:'실사 일정 대기 중' },
+  { id:'AC-12', proc:'재무', app:'ERP (SAP)',       name:'환율 적용 자동화',          type:'처리통제', isAuto:true,  owner:'최지우', status:'completed',   ev:'completed', test:'completed', rev:'completed',   pct:100, exc:false, notes:'' },
+  { id:'AC-13', proc:'재무', app:'ERP (SAP)',       name:'계정과목 자동 집계',        type:'처리통제', isAuto:true,  owner:'최지우', status:'under-review', ev:'completed', test:'completed', rev:'in-progress', pct:92, exc:false, notes:'' },
+  { id:'AC-14', proc:'재무', app:'ERP (SAP)',       name:'고정자산 감가상각 계산',    type:'처리통제', isAuto:true,  owner:'최지우', status:'completed',   ev:'completed', test:'completed', rev:'completed',   pct:100, exc:false, notes:'' },
+  { id:'AC-15', proc:'재무', app:'Consolidation',   name:'내부거래 자동 상계 처리',   type:'처리통제', isAuto:true,  owner:'박도현', status:'in-progress', ev:'in-progress', test:'not-started', rev:'not-started', pct:20, exc:false, notes:'연결 패키지 수령 대기' },
+];
+
+// ══════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════
+let itgcData, itacData, itgcCols, itacCols;
+let curDomain = 'ALL';
+let curProc   = 'ALL';
+let addColTarget = '';
+
+function loadState() {
+  try {
+    itgcData = JSON.parse(localStorage.getItem('itgc_data')) || deepClone(DEFAULT_ITGC);
+    itacData = JSON.parse(localStorage.getItem('itac_data')) || deepClone(DEFAULT_ITAC);
+    itgcCols = JSON.parse(localStorage.getItem('itgc_cols')) || [];
+    itacCols = JSON.parse(localStorage.getItem('itac_cols')) || [];
+    // migrate extra data
+    itgcData.forEach(r => { if(!r.extra) r.extra = {}; });
+    itacData.forEach(r => { if(!r.extra) r.extra = {}; });
+  } catch(e) {
+    itgcData = deepClone(DEFAULT_ITGC);
+    itacData = deepClone(DEFAULT_ITAC);
+    itgcCols = []; itacCols = [];
+  }
+}
+
+function saveState() {
+  localStorage.setItem('itgc_data', JSON.stringify(itgcData));
+  localStorage.setItem('itac_data', JSON.stringify(itacData));
+  localStorage.setItem('itgc_cols', JSON.stringify(itgcCols));
+  localStorage.setItem('itac_cols', JSON.stringify(itacCols));
+}
+
+function deepClone(o) { return JSON.parse(JSON.stringify(o)); }
+
+// ══════════════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════════════
+const STATUS_MAP = {
+  'not-started': { cls:'sb-ns', label:'미착수' },
+  'in-progress' : { cls:'sb-ip', label:'진행중' },
+  'under-review': { cls:'sb-rv', label:'검토중' },
+  'completed'   : { cls:'sb-ok', label:'완료' },
+  'issue'       : { cls:'sb-ex', label:'이슈있음' },
+};
+const SUB_MAP = {
+  'not-started':{ dot:'sdot-ns', label:'미착수' },
+  'in-progress':{ dot:'sdot-ip', label:'진행중' },
+  'completed'  :{ dot:'sdot-ok', label:'완료' },
+};
+function statusBadge(s){ const m=STATUS_MAP[s]||STATUS_MAP['not-started']; return `<span class="sb ${m.cls}">${m.label}</span>`; }
+function progressColor(p){ return p>=80?'fill-green':p>=50?'fill-blue':p>=20?'fill-orange':'fill-red'; }
+function pbar(p){ return `<div class="ipb"><div class="ipb-bar"><div class="ipb-fill ${progressColor(p)}" style="width:${p}%"></div></div><span class="pct">${p}%</span></div>`; }
+function subDot(s){ const m=SUB_MAP[s]||SUB_MAP['not-started']; return `<span class="sdot ${m.dot}" title="${m.label}"></span>`; }
+function autoBadge(a){ return a===true?'<span class="ab ab-y">자동</span>':a==='semi'?'<span class="ab ab-s">반자동</span>':'<span class="ab ab-n">수동</span>'; }
+function domTag(d){ const c={APD:'tag-apd',PC:'tag-pc',CO:'tag-co',PD:'tag-pd',ITAC:'tag-itac'}; return `<span class="dom-tag ${c[d]||''}">${d}</span>`; }
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function calcDomStats(domain){
+  const rows = itgcData.filter(r=>r.domain===domain);
+  const done = rows.filter(r=>r.status==='completed').length;
+  const ip   = rows.filter(r=>r.status==='in-progress'||r.status==='under-review').length;
+  const exc  = rows.filter(r=>r.exc).length;
+  const avgPct = rows.length ? Math.round(rows.reduce((a,r)=>a+r.pct,0)/rows.length) : 0;
+  return { total:rows.length, done, ip, exc, avgPct };
+}
+
+// ══════════════════════════════════════════════════
+// TAB / NAVIGATION
+// ══════════════════════════════════════════════════
+function switchTab(id, btn){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('pane-'+id).classList.add('active');
+  if(btn) btn.classList.add('active');
+  if(id==='dashboard') renderDashboard();
+  if(id==='itgc')      renderITGC();
+  if(id==='itac')      renderITAC();
+}
+
+// ══════════════════════════════════════════════════
+// DASHBOARD
+// ══════════════════════════════════════════════════
+function renderDashboard(){
+  // KPI
+  const allRows = [...itgcData, ...itacData];
+  const total   = allRows.length;
+  const done    = allRows.filter(r=>r.status==='completed').length;
+  const ip      = allRows.filter(r=>r.status==='in-progress'||r.status==='under-review').length;
+  const exc     = allRows.filter(r=>r.exc).length;
+  const pct     = Math.round(done/total*100);
+  const itgcDone= itgcData.filter(r=>r.status==='completed').length;
+  const itacDone= itacData.filter(r=>r.status==='completed').length;
+
+  document.getElementById('kpi-area').innerHTML = `
+    <div class="kpi">
+      <div class="kpi-lbl">전체 통제 수</div>
+      <div class="kpi-val">${total}</div>
+      <div class="kpi-sub">ITGC ${itgcData.length} · ITAC ${itacData.length}</div>
+    </div>
+    <div class="kpi green">
+      <div class="kpi-lbl">완료 통제</div>
+      <div class="kpi-val">${done}</div>
+      <div class="kpi-sub">${pct}% 달성</div>
+    </div>
+    <div class="kpi blue">
+      <div class="kpi-lbl">진행 중</div>
+      <div class="kpi-val">${ip}</div>
+      <div class="kpi-sub">진행중 + 검토중</div>
+    </div>
+    <div class="kpi orange" style="border-left-color:var(--orange)">
+      <div class="kpi-lbl">전체 진행률</div>
+      <div class="kpi-val">${Math.round(allRows.reduce((a,r)=>a+r.pct,0)/total)}%</div>
+      <div class="kpi-sub">평균 진행률</div>
+    </div>
+    <div class="kpi" style="border-left-color:${exc>0?'var(--red)':'var(--green)'}">
+      <div class="kpi-lbl">예외사항</div>
+      <div class="kpi-val" style="color:${exc>0?'var(--red)':'var(--green)'}">${exc}</div>
+      <div class="kpi-sub">${exc>0?'이슈 검토 필요':'현재까지 이상 없음'}</div>
+    </div>
+  `;
+
+  // Domain progress
+  const domains = [
+    { key:'APD', label:'APD · 변경관리', color:'fill-blue' },
+    { key:'PC',  label:'PC · 접근통제',  color:'fill-green' },
+    { key:'CO',  label:'CO · 운영통제',  color:'fill-orange' },
+    { key:'PD',  label:'PD · 문제관리',  color:'fill-red' },
+  ];
+  let dpHtml = '';
+  domains.forEach(d=>{
+    const s = calcDomStats(d.key);
+    dpHtml += `
+      <div style="margin-bottom:14px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+          <span style="font-weight:600;font-size:12px;">${d.label}</span>
+          <span style="font-size:11px;color:var(--gray)">${s.done}/${s.total} 완료 · 예외 ${s.exc}건</span>
+        </div>
+        <div class="pb"><div class="pb-fill ${d.color}" style="width:${s.avgPct}%"></div></div>
+        <div style="font-size:11px;color:var(--gray);margin-top:3px;">${s.avgPct}% 평균 진행</div>
+      </div>`;
+  });
+  document.getElementById('domain-prog').innerHTML = dpHtml;
+
+  // ITAC progress
+  const procs = ['수익','구매','급여','재고','재무'];
+  let itacHtml = '';
+  procs.forEach(p=>{
+    const rows = itacData.filter(r=>r.proc===p);
+    const avg  = rows.length ? Math.round(rows.reduce((a,r)=>a+r.pct,0)/rows.length) : 0;
+    const done = rows.filter(r=>r.status==='completed').length;
+    itacHtml += `
+      <div style="margin-bottom:14px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+          <span style="font-weight:600;font-size:12px;">${p}</span>
+          <span style="font-size:11px;color:var(--gray)">${done}/${rows.length} 완료</span>
+        </div>
+        <div class="pb"><div class="pb-fill fill-blue" style="width:${avg}%"></div></div>
+        <div style="font-size:11px;color:var(--gray);margin-top:3px;">${avg}% 평균 진행</div>
+      </div>`;
+  });
+  document.getElementById('itac-prog').innerHTML = itacHtml;
+
+  // Staff
+  let sHtml = '';
+  STAFF.forEach(s=>{
+    let myRows = [], total2=0, done2=0, exc2=0;
+    if(s.domains.includes('ITAC')){
+      myRows = [...myRows, ...itacData.filter(r=>r.owner===s.name)];
+    }
+    myRows = [...myRows, ...itgcData.filter(r=>r.owner===s.name)];
+    total2 = myRows.length;
+    done2  = myRows.filter(r=>r.status==='completed').length;
+    exc2   = myRows.filter(r=>r.exc).length;
+    const avg2 = total2 ? Math.round(myRows.reduce((a,r)=>a+r.pct,0)/total2) : 0;
+    sHtml += `
+      <div class="staff-card">
+        <div class="staff-av" style="background:${s.color}">${s.initials}</div>
+        <div class="staff-name">${s.name}</div>
+        <div class="staff-role">${s.role}</div>
+        <div class="staff-dom">
+          ${s.domains.map(d=>`<span class="staff-tag" style="background:${domTagBg(d)};color:${domTagColor(d)}">${d}</span>`).join('')}
+        </div>
+        <div style="font-size:12px;color:var(--gray);margin-bottom:6px;">담당 ${total2}건 · 완료 ${done2}건${exc2>0?` · <span style="color:var(--red)">예외 ${exc2}건</span>`:''}</div>
+        <div class="pb"><div class="pb-fill ${progressColor(avg2)}" style="width:${avg2}%"></div></div>
+        <div style="font-size:11px;color:var(--gray);margin-top:3px;text-align:right;">${avg2}%</div>
+      </div>`;
+  });
+  document.getElementById('staff-area').innerHTML = sHtml;
+}
+
+function domTagBg(d){ return {APD:'#E3F2FD',PC:'#E8F5E9',CO:'#FFF3E0',PD:'#F3E5F5',ITAC:'#FFF9C4'}[d]||'#EEE'; }
+function domTagColor(d){ return {APD:'#1565C0',PC:'#2E7D32',CO:'#E65100',PD:'#6A1B9A',ITAC:'#F57F17'}[d]||'#333'; }
+
+// ══════════════════════════════════════════════════
+// ITGC RENDER
+// ══════════════════════════════════════════════════
+function renderITGC(){
+  // Domain summary cards
+  const domCfg = [
+    { key:'APD', label:'Application Program Development', note:'변경관리' },
+    { key:'PC',  label:'Physical & Logical Access Control', note:'접근통제' },
+    { key:'CO',  label:'Computer Operations', note:'운영통제' },
+    { key:'PD',  label:'Problem & Incident Management', note:'문제/인시던트' },
+  ];
+  let dsHtml = '';
+  domCfg.forEach(d=>{
+    const s = calcDomStats(d.key);
+    dsHtml += `
+      <div class="dom-card">
+        <div>${domTag(d.key)}</div>
+        <div class="dom-name">${d.key}</div>
+        <div class="dom-sub">${d.label}</div>
+        <div class="dom-stat"><span>통제 수</span><strong>${s.total}</strong></div>
+        <div class="dom-stat"><span>완료</span><strong style="color:var(--green)">${s.done}</strong></div>
+        <div class="dom-stat"><span>진행중</span><strong style="color:var(--blue)">${s.ip}</strong></div>
+        <div class="dom-stat"><span>예외</span><strong style="color:${s.exc>0?'var(--red)':'var(--gray)'}">${s.exc}</strong></div>
+        <div class="pb" style="margin-top:8px;"><div class="pb-fill ${progressColor(s.avgPct)}" style="width:${s.avgPct}%"></div></div>
+        <div style="font-size:11px;color:var(--gray);margin-top:3px;">${s.avgPct}% 진행</div>
+      </div>`;
+  });
+  document.getElementById('dom-summary').innerHTML = dsHtml;
+
+  renderITGCTable();
+}
+
+function renderITGCTable(){
+  const rows = curDomain==='ALL' ? itgcData : itgcData.filter(r=>r.domain===curDomain);
+  document.getElementById('itgc-cnt').textContent = `${rows.length}개 통제`;
+
+  // THEAD
+  const extraHeaders = itgcCols.map((c,i)=>`
+    <th>${esc(c.name)} <button class="col-del" onclick="deleteCol('itgc',${i})" title="열 삭제">✕</button></th>
+  `).join('');
+
+  document.getElementById('itgc-thead').innerHTML = `<tr>
+    <th style="min-width:72px">통제 ID</th>
+    <th style="min-width:60px">도메인</th>
+    <th style="min-width:150px">통제명</th>
+    <th style="min-width:80px">담당자</th>
+    <th style="min-width:90px">모집단 성격</th>
+    <th style="min-width:130px">모집단 설명</th>
+    <th style="min-width:55px">자동</th>
+    <th style="min-width:70px">모집단 규모</th>
+    <th style="min-width:50px">샘플 수</th>
+    <th style="min-width:95px">진행 상태</th>
+    <th style="min-width:55px">증빙수집</th>
+    <th style="min-width:50px">테스트</th>
+    <th style="min-width:50px">검토</th>
+    <th style="min-width:110px">진행률</th>
+    <th style="min-width:50px">예외</th>
+    <th style="min-width:140px">비고</th>
+    ${extraHeaders}
+    <th style="min-width:40px"></th>
+  </tr>`;
+
+  // TBODY
+  let html = '';
+  rows.forEach(r=>{
+    const extraCells = itgcCols.map((c,i)=>{
+      const val = r.extra?.[c.name]||'';
+      if(c.type==='status') return `<td><select class="st-sel" onchange="setExtra('itgc','${r.id}','${esc(c.name)}',this.value)" style="font-size:11px;">
+        ${['Y','N','N/A','진행중','—'].map(v=>`<option ${val===v?'selected':''}>${v}</option>`).join('')}
+      </select></td>`;
+      if(c.type==='date') return `<td><input type="date" class="ec-in" value="${esc(val)}" onchange="setExtra('itgc','${r.id}','${esc(c.name)}',this.value)"></td>`;
+      return `<td class="ec"><input type="text" value="${esc(val)}" placeholder="입력..." onchange="setExtra('itgc','${r.id}','${esc(c.name)}',this.value)"></td>`;
+    }).join('');
+
+    html += `<tr id="tr-${r.id}">
+      <td><strong>${r.id}</strong></td>
+      <td>${domTag(r.domain)}</td>
+      <td style="font-weight:500;">${esc(r.name)}</td>
+      <td>${esc(r.owner)}</td>
+      <td><span style="font-size:11px;color:var(--gray)">${esc(r.popType)}</span></td>
+      <td style="font-size:11px;">${esc(r.popDesc)}</td>
+      <td>${autoBadge(r.isAuto)}</td>
+      <td style="text-align:center;">${esc(r.popSize)}</td>
+      <td style="text-align:center;">${r.sample!=null?r.sample:'N/A'}</td>
+      <td>
+        <select class="st-sel" onchange="setField('itgc','${r.id}','status',this.value)">
+          ${Object.entries(STATUS_MAP).map(([k,v])=>`<option value="${k}" ${r.status===k?'selected':''}>${v.label}</option>`).join('')}
+        </select>
+      </td>
+      <td style="text-align:center;">
+        ${subDot(r.ev)}
+        <select style="font-size:10px;border:none;background:none;cursor:pointer;vertical-align:middle;" onchange="setField('itgc','${r.id}','ev',this.value)">
+          ${Object.entries(SUB_MAP).map(([k,v])=>`<option value="${k}" ${r.ev===k?'selected':''}>${v.label}</option>`).join('')}
+        </select>
+      </td>
+      <td style="text-align:center;">
+        ${subDot(r.test)}
+        <select style="font-size:10px;border:none;background:none;cursor:pointer;vertical-align:middle;" onchange="setField('itgc','${r.id}','test',this.value)">
+          ${Object.entries(SUB_MAP).map(([k,v])=>`<option value="${k}" ${r.test===k?'selected':''}>${v.label}</option>`).join('')}
+        </select>
+      </td>
+      <td style="text-align:center;">
+        ${subDot(r.rev)}
+        <select style="font-size:10px;border:none;background:none;cursor:pointer;vertical-align:middle;" onchange="setField('itgc','${r.id}','rev',this.value)">
+          ${Object.entries(SUB_MAP).map(([k,v])=>`<option value="${k}" ${r.rev===k?'selected':''}>${v.label}</option>`).join('')}
+        </select>
+      </td>
+      <td>${pbar(r.pct)}</td>
+      <td style="text-align:center;">${r.exc?'<span class="exc" title="예외사항 있음">⚠</span>':'<span class="no-exc">—</span>'}</td>
+      <td class="ec"><input type="text" value="${esc(r.notes)}" placeholder="비고 입력..." style="width:100%;border:1px solid #E0E0E0;padding:3px 6px;border-radius:3px;font-size:12px;" onchange="setField('itgc','${r.id}','notes',this.value)"></td>
+      ${extraCells}
+      <td><button class="btn btn-g btn-sm btn-icon" onclick="openDetail('itgc','${r.id}')" title="상세 보기">🔍</button></td>
+    </tr>`;
+  });
+
+  document.getElementById('itgc-tbody').innerHTML = html || '<tr><td colspan="20" style="text-align:center;padding:24px;color:var(--gray);">데이터가 없습니다.</td></tr>';
+}
+
+function filterDomain(d, btn){
+  curDomain = d;
+  document.querySelectorAll('#dom-filter .dom-tab').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderITGCTable();
+}
+
+// ══════════════════════════════════════════════════
+// ITAC RENDER
+// ══════════════════════════════════════════════════
+function renderITAC(){
+  renderITACTable();
+}
+
+function renderITACTable(){
+  const rows = curProc==='ALL' ? itacData : itacData.filter(r=>r.proc===curProc);
+  document.getElementById('itac-cnt').textContent = `${rows.length}개 통제`;
+
+  const extraHeaders = itacCols.map((c,i)=>`
+    <th>${esc(c.name)} <button class="col-del" onclick="deleteCol('itac',${i})" title="열 삭제">✕</button></th>
+  `).join('');
+
+  document.getElementById('itac-thead').innerHTML = `<tr>
+    <th style="min-width:65px">통제 ID</th>
+    <th style="min-width:70px">프로세스</th>
+    <th style="min-width:110px">시스템/App</th>
+    <th style="min-width:165px">통제명</th>
+    <th style="min-width:75px">통제 유형</th>
+    <th style="min-width:55px">자동</th>
+    <th style="min-width:75px">담당자</th>
+    <th style="min-width:95px">진행 상태</th>
+    <th style="min-width:55px">증빙수집</th>
+    <th style="min-width:50px">테스트</th>
+    <th style="min-width:50px">검토</th>
+    <th style="min-width:110px">진행률</th>
+    <th style="min-width:50px">예외</th>
+    <th style="min-width:140px">비고</th>
+    ${extraHeaders}
+    <th style="min-width:40px"></th>
+  </tr>`;
+
+  const procColor = { '수익':'#1565C0', '구매':'#2E7D32', '급여':'#6A1B9A', '재고':'#E65100', '재무':'#F57F17' };
+  let html = '';
+  rows.forEach(r=>{
+    const pc = procColor[r.proc]||'#333';
+    const extraCells = itacCols.map((c,i)=>{
+      const val = r.extra?.[c.name]||'';
+      if(c.type==='status') return `<td><select class="st-sel" onchange="setExtra('itac','${r.id}','${esc(c.name)}',this.value)" style="font-size:11px;">
+        ${['Y','N','N/A','진행중','—'].map(v=>`<option ${val===v?'selected':''}>${v}</option>`).join('')}
+      </select></td>`;
+      if(c.type==='date') return `<td><input type="date" class="ec-in" value="${esc(val)}" onchange="setExtra('itac','${r.id}','${esc(c.name)}',this.value)"></td>`;
+      return `<td class="ec"><input type="text" value="${esc(val)}" placeholder="입력..." onchange="setExtra('itac','${r.id}','${esc(c.name)}',this.value)"></td>`;
+    }).join('');
+
+    html += `<tr id="tr-${r.id}">
+      <td><strong>${r.id}</strong></td>
+      <td><span style="background:${pc}1A;color:${pc};padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;">${r.proc}</span></td>
+      <td style="font-size:11px;color:var(--gray)">${esc(r.app)}</td>
+      <td style="font-weight:500;">${esc(r.name)}</td>
+      <td><span style="font-size:11px;background:#F5F5F5;padding:2px 7px;border-radius:3px;">${esc(r.type)}</span></td>
+      <td>${autoBadge(r.isAuto)}</td>
+      <td>${esc(r.owner)}</td>
+      <td>
+        <select class="st-sel" onchange="setField('itac','${r.id}','status',this.value)">
+          ${Object.entries(STATUS_MAP).map(([k,v])=>`<option value="${k}" ${r.status===k?'selected':''}>${v.label}</option>`).join('')}
+        </select>
+      </td>
+      <td style="text-align:center;">
+        ${subDot(r.ev)}
+        <select style="font-size:10px;border:none;background:none;cursor:pointer;vertical-align:middle;" onchange="setField('itac','${r.id}','ev',this.value)">
+          ${Object.entries(SUB_MAP).map(([k,v])=>`<option value="${k}" ${r.ev===k?'selected':''}>${v.label}</option>`).join('')}
+        </select>
+      </td>
+      <td style="text-align:center;">
+        ${subDot(r.test)}
+        <select style="font-size:10px;border:none;background:none;cursor:pointer;vertical-align:middle;" onchange="setField('itac','${r.id}','test',this.value)">
+          ${Object.entries(SUB_MAP).map(([k,v])=>`<option value="${k}" ${r.test===k?'selected':''}>${v.label}</option>`).join('')}
+        </select>
+      </td>
+      <td style="text-align:center;">
+        ${subDot(r.rev)}
+        <select style="font-size:10px;border:none;background:none;cursor:pointer;vertical-align:middle;" onchange="setField('itac','${r.id}','rev',this.value)">
+          ${Object.entries(SUB_MAP).map(([k,v])=>`<option value="${k}" ${r.rev===k?'selected':''}>${v.label}</option>`).join('')}
+        </select>
+      </td>
+      <td>${pbar(r.pct)}</td>
+      <td style="text-align:center;">${r.exc?'<span class="exc" title="예외사항 있음">⚠</span>':'<span class="no-exc">—</span>'}</td>
+      <td class="ec"><input type="text" value="${esc(r.notes)}" placeholder="비고 입력..." style="width:100%;border:1px solid #E0E0E0;padding:3px 6px;border-radius:3px;font-size:12px;" onchange="setField('itac','${r.id}','notes',this.value)"></td>
+      ${extraCells}
+      <td><button class="btn btn-g btn-sm btn-icon" onclick="openDetail('itac','${r.id}')" title="상세 보기">🔍</button></td>
+    </tr>`;
+  });
+
+  document.getElementById('itac-tbody').innerHTML = html || '<tr><td colspan="20" style="text-align:center;padding:24px;color:var(--gray);">데이터가 없습니다.</td></tr>';
+}
+
+function filterProc(p, btn){
+  curProc = p;
+  document.querySelectorAll('#itac-proc-filter .dom-tab').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderITACTable();
+}
+
+// ══════════════════════════════════════════════════
+// DATA MUTATIONS
+// ══════════════════════════════════════════════════
+function getDataArr(tbl){ return tbl==='itgc'?itgcData:itacData; }
+
+function setField(tbl, id, field, val){
+  const arr = getDataArr(tbl);
+  const row = arr.find(r=>r.id===id);
+  if(!row) return;
+  row[field] = val;
+  if(field==='status'){
+    // auto-update progress estimate
+    const map={'not-started':0,'in-progress':50,'under-review':85,'completed':100,'issue':60};
+    row.pct = row.pct || map[val]||0;
+  }
+  saveState();
+}
+
+function setExtra(tbl, id, colName, val){
+  const arr = getDataArr(tbl);
+  const row = arr.find(r=>r.id===id);
+  if(!row) return;
+  if(!row.extra) row.extra={};
+  row.extra[colName] = val;
+  saveState();
+}
+
+// ══════════════════════════════════════════════════
+// ADD / DELETE COLUMN
+// ══════════════════════════════════════════════════
+function openAddCol(tbl){
+  addColTarget = tbl;
+  document.getElementById('addcol-name').value='';
+  document.getElementById('addcol-type').value='text';
+  openModal('mo-addcol');
+  setTimeout(()=>document.getElementById('addcol-name').focus(),100);
+}
+
+function confirmAddCol(){
+  const name = document.getElementById('addcol-name').value.trim();
+  const type = document.getElementById('addcol-type').value;
+  if(!name){ alert('열 이름을 입력해주세요.'); return; }
+  if(addColTarget==='itgc'){
+    if(itgcCols.find(c=>c.name===name)){ alert('이미 동일한 이름의 열이 있습니다.'); return; }
+    itgcCols.push({name,type});
+  } else {
+    if(itacCols.find(c=>c.name===name)){ alert('이미 동일한 이름의 열이 있습니다.'); return; }
+    itacCols.push({name,type});
+  }
+  saveState();
+  closeModal('mo-addcol');
+  if(addColTarget==='itgc') renderITGCTable();
+  else renderITACTable();
+}
+
+function deleteCol(tbl, idx){
+  if(!confirm('이 열을 삭제하시겠습니까? 입력된 데이터도 함께 삭제됩니다.')) return;
+  if(tbl==='itgc'){
+    const colName = itgcCols[idx].name;
+    itgcCols.splice(idx,1);
+    itgcData.forEach(r=>{ if(r.extra) delete r.extra[colName]; });
+    saveState(); renderITGCTable();
+  } else {
+    const colName = itacCols[idx].name;
+    itacCols.splice(idx,1);
+    itacData.forEach(r=>{ if(r.extra) delete r.extra[colName]; });
+    saveState(); renderITACTable();
+  }
+}
+
+// ══════════════════════════════════════════════════
+// DETAIL MODAL
+// ══════════════════════════════════════════════════
+let detailTarget = null;
+
+function openDetail(tbl, id){
+  const arr = getDataArr(tbl);
+  const row = arr.find(r=>r.id===id);
+  if(!row) return;
+  detailTarget = {tbl, id};
+
+  document.getElementById('det-title').textContent = `${row.id} · ${row.name}`;
+
+  const isITGC = tbl==='itgc';
+  let body = `
+    <div class="section-lbl">기본 정보</div>
+    <div class="dl"><div class="dt">통제 ID</div><div class="dd"><strong>${row.id}</strong></div></div>
+    ${isITGC?`<div class="dl"><div class="dt">도메인</div><div class="dd">${domTag(row.domain)}</div></div>`:''}
+    ${!isITGC?`<div class="dl"><div class="dt">프로세스</div><div class="dd">${esc(row.proc)}</div></div><div class="dl"><div class="dt">시스템/Application</div><div class="dd">${esc(row.app)}</div></div>`:''}
+    <div class="dl"><div class="dt">통제명</div><div class="dd"><strong>${esc(row.name)}</strong></div></div>
+    ${isITGC?`<div class="dl"><div class="dt">통제 목적</div><div class="dd" style="font-size:12px;">${esc(row.obj)}</div></div>`:''}
+    ${!isITGC?`<div class="dl"><div class="dt">통제 유형</div><div class="dd">${esc(row.type)}</div></div>`:''}
+    <div class="dl"><div class="dt">자동통제 여부</div><div class="dd">${autoBadge(row.isAuto)}</div></div>
+    <div class="dl"><div class="dt">담당자</div><div class="dd">${esc(row.owner)}</div></div>
+    ${isITGC?`
+    <div class="section-lbl">모집단 정보</div>
+    <div class="dl"><div class="dt">모집단 성격</div><div class="dd">${esc(row.popType)}</div></div>
+    <div class="dl"><div class="dt">모집단 설명</div><div class="dd">${esc(row.popDesc)}</div></div>
+    <div class="dl"><div class="dt">모집단 규모</div><div class="dd">${esc(row.popSize)}</div></div>
+    <div class="dl"><div class="dt">샘플 수</div><div class="dd">${row.sample!=null?row.sample+'건':'N/A'}</div></div>
+    `:''}
+    <div class="section-lbl">진행 현황</div>
+    <div class="dl"><div class="dt">전체 진행 상태</div><div class="dd">${statusBadge(row.status)}</div></div>
+    <table class="smry">
+      <tr><td style="font-weight:600;">증빙 수집</td><td>${subDot(row.ev)} ${SUB_MAP[row.ev]?.label||'—'}</td>
+          <td style="font-weight:600;">테스트 수행</td><td>${subDot(row.test)} ${SUB_MAP[row.test]?.label||'—'}</td>
+          <td style="font-weight:600;">검토</td><td>${subDot(row.rev)} ${SUB_MAP[row.rev]?.label||'—'}</td></tr>
+    </table>
+    <div style="margin-top:10px;">${pbar(row.pct)}</div>
+
+    <div class="section-lbl">진행률 수동 조정</div>
+    <div class="fg">
+      <label class="fl">진행률 (%)</label>
+      <input class="fi" type="number" id="det-pct" min="0" max="100" value="${row.pct}">
+    </div>
+    <div class="fg">
+      <label class="fl">진행 상태</label>
+      <select class="fi" id="det-status">
+        ${Object.entries(STATUS_MAP).map(([k,v])=>`<option value="${k}" ${row.status===k?'selected':''}>${v.label}</option>`).join('')}
+      </select>
+    </div>
+    <div class="fg" style="display:flex;align-items:center;gap:10px;">
+      <input type="checkbox" id="det-exc" ${row.exc?'checked':''}>
+      <label for="det-exc" class="fl" style="margin:0;cursor:pointer;">예외사항 발견 (⚠ 표시)</label>
+    </div>
+    <div class="fg">
+      <label class="fl">비고 / 메모</label>
+      <textarea class="fi" id="det-notes" rows="3" placeholder="이슈 내용, 추가 검토 사항 등...">${esc(row.notes)}</textarea>
+    </div>
+  `;
+
+  document.getElementById('det-body').innerHTML = body;
+  openModal('mo-detail');
+}
+
+document.getElementById('det-save-btn').addEventListener('click', ()=>{
+  if(!detailTarget) return;
+  const arr = getDataArr(detailTarget.tbl);
+  const row = arr.find(r=>r.id===detailTarget.id);
+  if(!row) return;
+  row.pct    = parseInt(document.getElementById('det-pct').value)||0;
+  row.status = document.getElementById('det-status').value;
+  row.exc    = document.getElementById('det-exc').checked;
+  row.notes  = document.getElementById('det-notes').value;
+  saveState();
+  closeModal('mo-detail');
+  if(detailTarget.tbl==='itgc') renderITGCTable();
+  else renderITACTable();
+});
+
+// ══════════════════════════════════════════════════
+// MODAL
+// ══════════════════════════════════════════════════
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+
+// Close on overlay click
+document.querySelectorAll('.mo').forEach(el=>{
+  el.addEventListener('click', e=>{ if(e.target===el) el.classList.remove('open'); });
+});
+
+// Enter key in add col input
+document.getElementById('addcol-name').addEventListener('keydown', e=>{
+  if(e.key==='Enter') confirmAddCol();
+});
+
+// ══════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════
+function init(){
+  // Date
+  const now = new Date();
+  const days = ['일','월','화','수','목','금','토'];
+  document.getElementById('hdr-date').textContent =
+    `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} (${days[now.getDay()]})`;
+
+  loadState();
+  renderDashboard();
+  renderITGC();
+  renderITAC();
+}
+
+init();
+</script>
+</body>
+</html>
